@@ -7,6 +7,10 @@ export default {
     preto: '#070707',
     branco: '#FFFFFF'
   },
+  fonts: {
+    regular: 'Poppins_400Regular',
+    bold: 'Poppins_700Bold'
+  },
   typography: {
     title: {
       fontSize: 24,

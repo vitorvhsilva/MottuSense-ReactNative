@@ -35,13 +35,13 @@ const HomeScreen = () => {
 const Container = styled.ScrollView`
   flex: 1;
   background-color: ${theme.colors.preto};
-  `;
+`;
 
 const Content = styled.View`
   padding: 40px;
   display: flex;
   justify-content: space-between;
-  height: 70vh;
+  height: 80vh;
   align-items: center;
 `;
 
@@ -62,26 +62,26 @@ const SignUpButton = styled.TouchableOpacity`
 
 const ButtonText = styled.Text`
   color: ${theme.colors.branco};
-  font-weight: ${theme.typography.title.fontWeight};
+  font-family: ${theme.fonts.bold}; 
   font-size: ${theme.typography.title.fontSize};
   text-align: center;
 `;
 
 const HomeTitle = styled.Text`
   color: ${theme.colors.branco};
-  font-weight: ${theme.typography.subtitle.fontWeight};
+  font-family: ${theme.fonts.regular};
   font-size: ${theme.typography.subtitle.fontSize};
 `;
 
 const LoginTitle = styled.Text`
   color: ${theme.colors.branco};
-  font-weight: ${theme.typography.subtitle.fontWeight};
+  font-family: ${theme.fonts.regular}; 
   font-size: ${theme.typography.subtitle.fontSize};
 `;
 
 const LoginLinkText = styled.Text`
   color: ${theme.colors.verdeClaro1};
-  font-weight: ${theme.typography.title.fontWeight};
+  font-family: ${theme.fonts.bold}; 
   font-size: ${theme.typography.subtitle.fontSize};
   border-bottom-width: 1px;
   border-bottom-color: ${theme.colors.verdeClaro1};
