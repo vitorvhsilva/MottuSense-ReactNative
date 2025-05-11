@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="Auth"
+      initialRouteName="SignUp"
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
