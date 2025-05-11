@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { ScrollView, FlatList, Alert, Button } from 'react-native';
 import styled from 'styled-components/native';
-import HeaderComponent from '../components/HeaderComponent';
 import theme from '../styles/theme';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation';
 
-const HomeScreen = () => {
+type HomeScreenProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Auth'>;
+};
+
+
+const AuthScreen: React.FC<HomeScreenProps> = ({ navigation }) =>{
 
   return (
     <Container>
@@ -18,7 +22,7 @@ const HomeScreen = () => {
         </MottoSenseLogo>
 
         <AuthContent>
-          <SignUpButton>
+          <SignUpButton onPress={() => navigation.navigate('SignUp')}>
             <ButtonText>Cadastrar</ButtonText>
           </SignUpButton>
 
@@ -113,4 +117,4 @@ const LoginLinkText = styled.Text`
 const LoginLink = styled.TouchableOpacity`
 `;
 
-export default HomeScreen;
+export default AuthScreen;
