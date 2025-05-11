@@ -12,6 +12,11 @@ const HomeScreen = () => {
       <Content>
         <HomeTitle>Seja bem vindo!</HomeTitle>
 
+        <MottoSenseLogo>
+          <MottuSenseImage source={require('../../assets/logos/logoverde.png')} />
+          <MottuSenseText>mottusense</MottuSenseText>
+        </MottoSenseLogo>
+
         <AuthContent>
           <SignUpButton>
             <ButtonText>Cadastrar</ButtonText>
@@ -41,8 +46,26 @@ const Content = styled.View`
   padding: 40px;
   display: flex;
   justify-content: space-between;
-  height: 80vh;
+  height: 90vh;
   align-items: center;
+`;
+
+const MottoSenseLogo = styled.View`
+  width: 100%;
+  align-items: center;
+`
+
+const MottuSenseImage = styled.Image`
+  resize-mode: contain;
+  width: 250px;
+  height: 250px; 
+  margin-bottom: -50px; 
+`;
+
+const MottuSenseText = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.bold};
+  font-size: 40px
 `;
 
 const AuthContent = styled.View`
