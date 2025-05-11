@@ -1,0 +1,28 @@
+export default {
+  colors: {
+    verdeClaro1: '#00B131',
+    verdeClaro2: '#D8EBDD',
+    verdeEscuro1: '#006C1E',
+    verdeEscuro2: '#003910',
+    preto: '#070707',
+    branco: '#FFFFFF'
+  },
+  typography: {
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+    },
+    subtitle: {
+      fontSize: 18,
+      fontWeight: '500',
+    },
+    body: {
+      fontSize: 16,
+    },
+  },
+  spacing: {
+    small: 8,
+    medium: 16,
+    large: 24,
+  },
+};
