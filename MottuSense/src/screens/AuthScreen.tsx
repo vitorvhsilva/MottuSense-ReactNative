@@ -29,7 +29,7 @@ const AuthScreen: React.FC<HomeScreenProps> = ({ navigation }) =>{
           <LoginTitle>
             Já tem uma conta? 
             <LoginLink 
-              //onPress={() => navigation.navigate('Login')}  
+              onPress={() => navigation.navigate('Login')}  
             >
               <LoginLinkText> Faça login.</LoginLinkText>
             </LoginLink>
