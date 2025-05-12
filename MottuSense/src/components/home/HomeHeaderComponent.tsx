@@ -1,15 +1,15 @@
 import styled from "styled-components/native";
-import theme from "../styles/theme";
+import theme from "../../styles/theme";
 
 export const HomeHeaderComponent = () => {
     return (
         <HeaderContainer>
             <Menu>
-                <MenuIcon source={require('../../assets/icons/menu_hamburguer.png')}/>
+                <MenuIcon source={require('../../../assets/icons/menu_hamburguer.png')}/>
             </Menu>
 
             <UserInfo>
-                <UserIcon source={require('../../assets/icons/usuario_default.png')} />
+                <UserIcon source={require('../../../assets/icons/usuario_default.png')} />
                 <UserTexts>
                     <UserFirstName>Vitor</UserFirstName>
                     <UserLastName>Hugo da Silva</UserLastName>
@@ -17,7 +17,7 @@ export const HomeHeaderComponent = () => {
             </UserInfo>
 
             <Notification>
-                <NotificationIcon source={require('../../assets/icons/notification.png')}/>
+                <NotificationIcon source={require('../../../assets/icons/notification.png')}/>
                 <NotificationCount>
                     <NotificationCountText>1</NotificationCountText>
                 </NotificationCount>
@@ -92,14 +92,17 @@ const NotificationIcon = styled.Image`
 `
 
 const NotificationCount = styled.View`
-    width: 40%;
-    height: 60%;
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
     top: -10px;
     right: 5px;
     z-index: 10;
     background-color: ${theme.colors.verdeClaro1};
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const NotificationCountText = styled.Text`
