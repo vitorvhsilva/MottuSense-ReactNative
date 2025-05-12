@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import theme from "../../styles/theme";
 import { FlatList } from "react-native";
+import { useState } from "react";
 
 
 type Branch = {
@@ -15,6 +16,8 @@ export const HomeSelectBranchComponent = () => {
         {id: "idTeste2", name: "República"},
     ] 
 
+    const [viewBranchs, setViewBranchs] = useState(false)
+
     const renderBranch = ({ item }: { item: Branch }) => {
         return (
             <BranchCard>
@@ -28,18 +31,24 @@ export const HomeSelectBranchComponent = () => {
             <SelectBranchTitleText>Selecione a <SelectBranchGreenText>Filial</SelectBranchGreenText> que você deseja visualizar</SelectBranchTitleText>
         
 
-                <SelectedBranchView>
+                <SelectedBranchView onPress={() => setViewBranchs(!viewBranchs)}>
                     <SelectedBranchText>Butantã</SelectedBranchText>
-                    <SelectedBranchViewIcon source={require('../../../assets/icons/expandir.png')}/>
+                    {viewBranchs ? 
+                        <SelectedBranchViewIcon source={require('../../../assets/icons/voltar.png')}/>
+                        :
+                        <SelectedBranchViewIcon source={require('../../../assets/icons/expandir.png')}/>
+                    }
                 </SelectedBranchView>
 
-                <AvailableBranchs>
-                <BranchList
-                        data={branchs}
-                        renderItem={renderBranch}
-                        keyExtractor={(item: Branch) => item.id}
-                    />
-                </AvailableBranchs>
+                {viewBranchs && 
+                    <AvailableBranchs>
+                    <BranchList
+                            data={branchs}
+                            renderItem={renderBranch}
+                            keyExtractor={(item: Branch) => item.id}
+                        />
+                    </AvailableBranchs>
+                }
 
         </SelectBranchContainer>
     )
@@ -66,7 +75,7 @@ const SelectBranchGreenText = styled.Text`
     color: ${theme.colors.verdeClaro1};
 `;
 
-const SelectedBranchView = styled.View`
+const SelectedBranchView = styled.TouchableOpacity`
     width: 100%;
     margin: 10px 0px 0px;
     padding: 10px 30px 10px; 
@@ -104,6 +113,8 @@ const BranchList = styled(FlatList)`
 const BranchCard = styled.View`
     width: 100%;
     background-color: ${theme.colors.verdeClaro1};
+    padding: 7px 10px;
+    border: 1.5px solid ${theme.colors.branco};
 `
 
 const BranchCardText = styled.Text`
