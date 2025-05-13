@@ -87,6 +87,11 @@ export const ViewMotorcyclesComponent = () => {
                                 value={motorcycle.iot}
                             />
                         </MotorcycleInformation>
+                        <MotorcycleButtonContainer>
+                            <MotorcycleButton>
+                                <MotorcycleButtonText>Editar</MotorcycleButtonText>
+                            </MotorcycleButton>
+                        </MotorcycleButtonContainer>
                     </MotorcycleInformationContainer> )}
                 </MotorcycleItem>
             ))}
@@ -189,4 +194,28 @@ const MotorcycleInformationInput = styled.TextInput`
     font-family: ${theme.fonts.regular};
     font-size: ${theme.typography.body.fontSize};
     padding: 8px 10px;
+`
+
+const MotorcycleButtonContainer = styled.View`
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const MotorcycleButton = styled.TouchableOpacity`
+    margin: 10px 0px;
+    width: 80%;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: ${theme.colors.verdeEscuro1};
+`
+
+const MotorcycleButtonText = styled.Text`
+    padding: 5px;
+    color: ${theme.colors.branco};
+    font-family: ${theme.fonts.regular};
+    font-size: ${theme.typography.body.fontSize};
+    text-align: center;
 `
