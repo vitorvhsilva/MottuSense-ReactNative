@@ -7,18 +7,21 @@ type FilterOption = {
     label: string;
 }
 
-export const ViewMotorcycleFilterComponent = () => {
-    const filterOptions: FilterOption[] = [
-        { id: 1, label: "Placa" },
-        { id: 2, label: "IoT" },
-        { id: 3, label: "Filial" }
-    ];
+type ViewMotorcycleFilterComponentProps = {
+    filterOptions: FilterOption[];
+    selectedFilter: number | null;
+    setSelectedFilter: (id: number | null) => void;
+}
 
-    const [selectedFilter, setSelectedFilter] = useState<number | null>(1);
-
+export const ViewMotorcycleFilterComponent = ({ 
+    filterOptions,
+    selectedFilter, 
+    setSelectedFilter 
+}: ViewMotorcycleFilterComponentProps) => {
     const handleFilterPress = (filterId: number) => {
         setSelectedFilter(selectedFilter === filterId ? null : filterId);
     };
+    
     
     return (
         <ContainerHeader>
@@ -64,7 +67,7 @@ const FilterContainer = styled.View`
 
 const FilterTitle = styled.Text`
     color: ${theme.colors.verdeClaro1};
-    font-family: ${theme.fonts.bold}; 
+    font-family: ${theme.fonts.regular}; 
     font-size: ${theme.typography.subtitle.fontSize};
     text-align: start;
 `
@@ -88,7 +91,7 @@ const SelectFilter = styled.TouchableOpacity`
 
 const SelectFilterText = styled.Text`
     color: ${theme.colors.branco};
-    font-family: ${theme.fonts.bold}; 
+    font-family: ${theme.fonts.regular}; 
     font-size: 12px;
     text-align: center;
 `
