@@ -5,6 +5,7 @@ import { ViewMotorcycleFilterComponent } from "../components/view_motorcycle/Vie
 import theme from "../styles/theme";
 import { RootStackParamList } from "../types/navigation";
 import { ViewMotorcycleSearchBarComponent } from "../components/view_motorcycle/ViewMotorcycleSearchBarComponent";
+import { ViewMotorcyclesComponent } from "../components/view_motorcycle/ViewMotorcyclesComponent";
 
 type ViewMotorcycleScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'ViewMotorcycle'>;
@@ -48,6 +49,8 @@ export const ViewMotorcycleScreen: React.FC<ViewMotorcycleScreenProps> = ({ navi
                 searchText={searchText}
                 onSearchTextChange={setSearchText}
             />
+
+            <ViewMotorcyclesComponent/>
         </Container>
     )
 }

@@ -46,6 +46,7 @@ export const ViewMotorcycleSearchBarComponent: React.FC<ViewMotorcycleSearchBarC
     color: ${theme.colors.verdeClaro1};
     font-family: ${theme.fonts.regular}; 
     font-size: ${theme.typography.subtitle.fontSize};
+    margin-bottom: 10px;
   `;
   
   const SearchBarContainer = styled.View`
