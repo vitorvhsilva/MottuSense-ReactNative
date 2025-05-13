@@ -7,7 +7,7 @@ type Motorcycle = {
     id: string;
     model: string;
     plate: string;
-    chassis?: string;
+    chassi?: string;
     iot?: string;
   };
 
@@ -18,21 +18,21 @@ export const ViewMotorcyclesComponent = () => {
         id: "1",
         model: "Mottu Pop",
         plate: "TTTT-333",
-        chassis: "9BWZZZ377VT004251",
+        chassi: "9BWZZZ377VT004251",
         iot: "IoT-12345"
     },
     {
         id: "2",
         model: "Mottu Smart",
         plate: "ABCD-123",
-        chassis: "9BWZZZ377VT004252",
+        chassi: "9BWZZZ377VT004252",
         iot: "IoT-12346"
     },
     {
         id: "3",
         model: "Mottu E",
         plate: "EFGH-456",
-        chassis: "9BWZZZ377VT004253",
+        chassi: "9BWZZZ377VT004253",
         iot: "IoT-12347"
     }
     ]);
@@ -40,37 +40,56 @@ export const ViewMotorcyclesComponent = () => {
     const [expandedId, setExpandedId] = useState<string | null>(null);
 
     const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
+        setExpandedId(expandedId === id ? null : id);
     };
 
     return (
         <Container>
-            <MotorcycleItem>
-                <MotorcycleContainer>
-                    <MotorcycleIcon source={require('../../../assets/icons/moto_verde.png')} />
-                    <MotorcycleTextContainer>
-                        <MotorcycleType>Mottu Pop</MotorcycleType>
-                        <MotorcyclePlate>Placa: TTTT-333</MotorcyclePlate>
-                    </MotorcycleTextContainer>
-                    <ExpandIcon>
-                        <ExpandIconImage source={require('../../../assets/icons/expandir.png')} />
-                    </ExpandIcon>
-                </MotorcycleContainer>
-                <MotorcycleInformationContainer>
-                    <MotorcycleInformation>
-                        <MotorcycleInformationText>Placa</MotorcycleInformationText>
-                        <MotorcycleInformationInput/>
-                    </MotorcycleInformation>
-                    <MotorcycleInformation>
-                        <MotorcycleInformationText>Chassi</MotorcycleInformationText>
-                        <MotorcycleInformationInput/>
-                    </MotorcycleInformation>
-                    <MotorcycleInformation>
-                        <MotorcycleInformationText>IoT</MotorcycleInformationText>
-                        <MotorcycleInformationInput/>
-                    </MotorcycleInformation>
-                </MotorcycleInformationContainer>
-            </MotorcycleItem>
+            {motorcycles.map((motorcycle) => (
+                <MotorcycleItem key={motorcycle.id}>
+                        <MotorcycleContainer 
+                            style={{
+                            backgroundColor: expandedId === motorcycle.id 
+                                ? theme.colors.verdeEscuro2 
+                                : theme.colors.cinza
+                            }}>
+                        <MotorcycleIcon source={require('../../../assets/icons/moto_verde.png')} />
+                        <MotorcycleTextContainer>
+                            <MotorcycleType>Mottu Pop</MotorcycleType>
+                            <MotorcyclePlate>Placa: TTTT-333</MotorcyclePlate>
+                        </MotorcycleTextContainer>
+                        <ExpandIcon onPress={() => toggleExpand(motorcycle.id)}>
+                            <ExpandIconImage 
+                            source={require('../../../assets/icons/expandir.png')} 
+                            style={{
+                                transform: [{ rotate: expandedId === motorcycle.id ? '90deg' : '0deg' }]
+                            }}
+                            />
+                        </ExpandIcon>
+                    </MotorcycleContainer>
+                    {expandedId === motorcycle.id && (
+                    <MotorcycleInformationContainer>
+                        <MotorcycleInformation>
+                            <MotorcycleInformationText>Placa</MotorcycleInformationText>
+                            <MotorcycleInformationInput 
+                                value={motorcycle.plate}
+                            />
+                        </MotorcycleInformation>
+                        <MotorcycleInformation>
+                            <MotorcycleInformationText>Chassi</MotorcycleInformationText>
+                            <MotorcycleInformationInput
+                                value={motorcycle.chassi}
+                            />
+                        </MotorcycleInformation>
+                        <MotorcycleInformation>
+                            <MotorcycleInformationText>IoT</MotorcycleInformationText>
+                            <MotorcycleInformationInput
+                                value={motorcycle.iot}
+                            />
+                        </MotorcycleInformation>
+                    </MotorcycleInformationContainer> )}
+                </MotorcycleItem>
+            ))}
         </Container>
     )
 }
@@ -88,6 +107,7 @@ const MotorcycleItem = styled.View`
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    margin: 10px 0px;
 `
 
 const MotorcycleContainer = styled.View`
