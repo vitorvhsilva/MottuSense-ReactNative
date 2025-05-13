@@ -5,4 +5,5 @@ export type RootStackParamList = {
   Home: undefined;
   AdicionarMoto: undefined;
   Notifications: undefined;
+  MenuHome: undefined;
 };

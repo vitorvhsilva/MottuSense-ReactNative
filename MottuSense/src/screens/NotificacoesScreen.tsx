@@ -11,7 +11,7 @@ type NotificationScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Notifications'>;
 };
 
-// Lista de eventos fictícios
+
 const eventosMoto = [
   {
     idEventoMoto: 'evt001',

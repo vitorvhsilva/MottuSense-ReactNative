@@ -5,13 +5,14 @@ import { SignUpScreen } from '../screens/SignUpScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AdicionarMoto } from '../screens/AdicionarMoto'
 import { NotificationScreen } from '../screens/NotificacoesScreen';
+import { MenuHome } from '../screens/MenuHome';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="Notifications"
+      initialRouteName="MenuHome"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
@@ -23,6 +24,7 @@ export default function AppRoutes() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="AdicionarMoto" component={AdicionarMoto} />
       <Stack.Screen name="Notifications" component={NotificationScreen} />
+      <Stack.Screen name="MenuHome" component={MenuHome} />
     </Stack.Navigator>
   );
 }
