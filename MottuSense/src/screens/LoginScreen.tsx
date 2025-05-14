@@ -1,9 +1,9 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import theme from "../styles/theme";
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
 import { InputAuthComponent } from '../components/InputAuthComponent';
+import theme from "../styles/theme";
+import { RootStackParamList } from '../types/navigation';
 
 type LoginScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;

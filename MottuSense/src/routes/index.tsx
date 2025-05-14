@@ -7,13 +7,14 @@ import { NotificationScreen } from '../screens/NotificacoesScreen';
 import { SignUpScreen } from '../screens/SignUpScreen';
 import { ViewMotorcycleScreen } from '../screens/ViewMotorcycleScreen';
 import { UserConfig } from '../screens/UserConfig';
+import { SeeCourtyardScreen } from '../screens/SeeCourtyard';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="Notifications"
+      initialRouteName="SeeCourtyard"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
@@ -27,6 +28,7 @@ export default function AppRoutes() {
       <Stack.Screen name="ViewMotorcyclesScreen" component={ViewMotorcycleScreen} />
       <Stack.Screen name="Notifications" component={NotificationScreen} />
       <Stack.Screen name="UserConfig" component={UserConfig} />
+      <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} />
     </Stack.Navigator>
   );
 }
