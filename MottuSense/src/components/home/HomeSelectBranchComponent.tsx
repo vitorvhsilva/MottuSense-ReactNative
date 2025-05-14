@@ -1,26 +1,31 @@
 import styled from "styled-components/native";
 import theme from "../../styles/theme";
 import { FlatList } from "react-native";
-import { useState } from "react";
-
 
 type Branch = {
     id: string,
     name: string
 }
 
-export const HomeSelectBranchComponent = () => {
+type HomeSelectBranchComponentProps = {
+    branches: Branch[];
+    selectedBranch: string;
+    onSelectBranch: (branchName: string) => void;
+    viewBranches: boolean;
+    setViewBranches: (value: boolean) => void;
+}
 
-    const branchs: Branch[] = [
-        {id: "idTeste1", name: "Butantã"},
-        {id: "idTeste2", name: "República"},
-    ] 
-
-    const [viewBranchs, setViewBranchs] = useState(false)
+export const HomeSelectBranchComponent = ({
+    branches,
+    selectedBranch,
+    onSelectBranch,
+    viewBranches,
+    setViewBranches
+}: HomeSelectBranchComponentProps) => {
 
     const renderBranch = ({ item }: { item: Branch }) => {
         return (
-            <BranchCard>
+            <BranchCard onPress={() => onSelectBranch(item.name)}>
                 <BranchCardText>{item.name}</BranchCardText>
             </BranchCard>
         );
@@ -30,26 +35,24 @@ export const HomeSelectBranchComponent = () => {
         <SelectBranchContainer>
             <SelectBranchTitleText>Selecione a <SelectBranchGreenText>Filial</SelectBranchGreenText> que você deseja visualizar</SelectBranchTitleText>
         
-
-                <SelectedBranchView onPress={() => setViewBranchs(!viewBranchs)}>
-                    <SelectedBranchText>Butantã</SelectedBranchText>
-                    {viewBranchs ? 
-                        <SelectedBranchViewIcon source={require('../../../assets/icons/voltar.png')}/>
-                        :
-                        <SelectedBranchViewIcon source={require('../../../assets/icons/expandir.png')}/>
-                    }
-                </SelectedBranchView>
-
-                {viewBranchs && 
-                    <AvailableBranchs>
-                    <BranchList
-                            data={branchs}
-                            renderItem={renderBranch}
-                            keyExtractor={(item: Branch) => item.id}
-                        />
-                    </AvailableBranchs>
+            <SelectedBranchView onPress={() => setViewBranches(!viewBranches)}>
+                <SelectedBranchText>{selectedBranch}</SelectedBranchText>
+                {viewBranches ? 
+                    <SelectedBranchViewIcon source={require('../../../assets/icons/voltar.png')}/>
+                    :
+                    <SelectedBranchViewIcon source={require('../../../assets/icons/expandir.png')}/>
                 }
+            </SelectedBranchView>
 
+            {viewBranches && 
+                <AvailableBranchs>
+                    <BranchList
+                        data={branches}
+                        renderItem={renderBranch}
+                        keyExtractor={(item: Branch) => item.id}
+                    />
+                </AvailableBranchs>
+            }
         </SelectBranchContainer>
     )
 }
@@ -110,7 +113,7 @@ const BranchList = styled(FlatList)`
 
 `
 
-const BranchCard = styled.View`
+const BranchCard = styled.TouchableOpacity`
     width: 100%;
     background-color: ${theme.colors.verdeClaro1};
     padding: 7px 10px;

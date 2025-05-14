@@ -18,21 +18,18 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
 
   return (
     <Container>
-      <BackButton onPress={() => navigation.goBack()}>
-        <BackIcon source={require('../../assets/icons/voltar.png')} resizeMode="contain" />
-      </BackButton>
 
     <Header>
-    <BackButton onPress={() => navigation.goBack()}>
-        <BackIcon source={require('../../assets/icons/voltar.png')} resizeMode="contain" />
-    </BackButton>
+      <BackButton onPress={() => navigation.goBack()}>
+          <BackIcon source={require('../../assets/icons/voltar.png')} resizeMode="contain" />
+      </BackButton>
 
-    <AvatarSection>
-        <AvatarContainer>
-        <Avatar source={require('../../assets/icons/usuario_default.png')} />
-        </AvatarContainer>
-        <EditPhotoText>Visualizar ou Editar Foto</EditPhotoText>
-    </AvatarSection>
+      <AvatarSection>
+          <AvatarContainer>
+          <Avatar source={require('../../assets/icons/usuario_default.png')} />
+          </AvatarContainer>
+          <EditPhotoText>Visualizar ou Editar Foto</EditPhotoText>
+      </AvatarSection>
     </Header>
 
 
