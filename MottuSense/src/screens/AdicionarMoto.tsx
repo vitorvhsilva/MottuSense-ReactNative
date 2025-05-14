@@ -44,7 +44,8 @@ export const AdicionarMoto: React.FC<MotoRegisterScreenProps> = ({ navigation })
   );
 };
 
-// Styled Components
+
+
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #ffffff;
