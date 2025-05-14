@@ -1,15 +1,14 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import theme from '../styles/theme';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
 import { InputAuthComponent } from '../components/InputAuthComponent';
+import { RootStackParamList } from '../types/navigation';
 
 type MotoRegisterScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'AdicionarMoto'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'AddMotorcycle'>;
 };
 
-export const AdicionarMoto: React.FC<MotoRegisterScreenProps> = ({ navigation }) => {
+export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation }) => {
   const [tipoMoto, setTipoMoto] = useState('');
   const [placa, setPlaca] = useState('');
   const [chassi, setChassi] = useState('');
