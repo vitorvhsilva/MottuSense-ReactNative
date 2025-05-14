@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
+import theme from '../styles/theme';
 
 interface NotificationCardProps {
   background: string;
@@ -36,7 +37,6 @@ const eventosMoto = [
   }
 ];
 
-// Ícones por cor
 const getIconByColor = (color: string) => {
   switch (color) {
     case 'VERDE':
@@ -50,7 +50,6 @@ const getIconByColor = (color: string) => {
   }
 };
 
-// Cores de fundo
 const getBackgroundColor = (color: string) => {
   switch (color) {
     case 'VERDE':
@@ -121,6 +120,8 @@ const SectionTitle = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 12px;
+  font-family: ${theme.fonts.bold};
+  font-size: ${theme.typography.subtitle.fontSize};
 `;
 
 
@@ -142,5 +143,6 @@ const NotificationIcon = styled.Image`
 const NotificationText = styled.Text`
   flex: 1;
   font-size: 14px;
+  font-family: ${theme.fonts.regular};
   color: #000;
 `;
