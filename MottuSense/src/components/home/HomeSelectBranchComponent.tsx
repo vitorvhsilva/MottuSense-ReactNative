@@ -23,6 +23,8 @@ export const HomeSelectBranchComponent = ({
     setViewBranches
 }: HomeSelectBranchComponentProps) => {
 
+    branches = branches.filter(b => b.name != selectedBranch)
+
     const renderBranch = ({ item }: { item: Branch }) => {
         return (
             <BranchCard onPress={() => onSelectBranch(item.name)}>
