@@ -22,19 +22,19 @@ export const SeeCourtyardScreen: React.FC<SeeCourtyardScreenProps> = ({ navigati
         const courtyardHeight = height * 0.7; // 70% da altura da tela para o pátio
     
         const motorcycles: MotorcyclePosition[] = [
-            { id: '1', x: 20, y: 30, placa: 'ABC-1234', modelo: "MOTTU_E", status: "AGENDADA_PARA_MANUTENCAO",  },
-            { id: '1', x: 30, y: 40, placa: 'ABC-1234', modelo: "MOTTU_E", status: "AGENDADA_PARA_MANUTENCAO",  },
-            { id: '1', x: 40, y: 70, placa: 'ABC-1234', modelo: "MOTTU_E", status: "AGENDADA_PARA_MANUTENCAO",  },
-            { id: '1', x: 50, y: 30, placa: 'ABC-1234', modelo: "MOTTU_E", status: "AGENDADA_PARA_MANUTENCAO",  }
+            { id: '1', x: 20, y: 30, placa: 'ABC-1234', modelo: "MOTTU_E", status: "PRONTA_PARA_ALUGUEL",  },
+            { id: '1', x: 30, y: 40, placa: 'DYA-2321', modelo: "MOTTU_POP", status: "AGENDADA_PARA_MANUTENCAO",  },
+            { id: '1', x: 40, y: 70, placa: 'UDS-3212', modelo: "MOTTU_SPORT", status: "SEM_PLACA",  },
+            { id: '1', x: 50, y: 30, placa: 'UIP-3131', modelo: "MOTTU_E", status: "DANIFICADA",  }
         ];
     
         const getIconByStatus = (status?: string) => {
             switch(status) {
-                case 'PRONTA_PARA_ALUGUEL': return '../../assets/icons/moto_verde.png';
-                case 'SEM_PLACA': return '../../assets/icons/moto_rosa.png';
-                case 'AGENDADA_PARA_MANUTENCAO': return '../../assets/icons/moto_cinza.png';
-                case 'DANIFICADA': return '../../assets/icons/moto_vermelha.png';
-                default: return '';
+                case 'PRONTA_PARA_ALUGUEL': return require('../../assets/icons/moto_verde.png');
+                case 'SEM_PLACA': return require('../../assets/icons/moto_rosa.png');
+                case 'AGENDADA_PARA_MANUTENCAO': return require('../../assets/icons/moto_cinza.png');
+                case 'DANIFICADA': return require('../../assets/icons/moto_vermelha.png');
+                default: return require('../../assets/icons/moto_cinza.png');
             }
         };
     
@@ -46,13 +46,15 @@ export const SeeCourtyardScreen: React.FC<SeeCourtyardScreenProps> = ({ navigati
                 <HelpIcon source={require('../../assets/icons/info.png')} />
             </HeaderContainer>
             <MotorcycleContainer>
-                <Motorcycle
-                    style={{
-                        left: `10%`, 
-                        top: `20%`,
-                    }}>
-                    <MotorcycleImage source={require('../../assets/icons/moto_verde.png')}/>
-                </Motorcycle>
+                {motorcycles.map((moto) => (
+                    <Motorcycle
+                        style={{
+                            left: `${moto.x}%`, 
+                            top: `${moto.y}%`,
+                        }}>
+                        <MotorcycleImage source={getIconByStatus(moto.status)}/>
+                    </Motorcycle>
+                ))}
             </MotorcycleContainer>
         </Container>
     )
