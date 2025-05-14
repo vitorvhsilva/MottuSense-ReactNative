@@ -4,6 +4,7 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   AdicionarMoto: undefined;
+  ViewMotorcycle: undefined;
   Notifications: undefined;
   MenuHome: undefined;
 };
