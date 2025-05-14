@@ -3,17 +3,17 @@ import { AddMotorcycle } from '../screens/AddMotorcycle';
 import AuthScreen from '../screens/AuthScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { LoginScreen } from '../screens/LoginScreen';
-import { MenuHome } from '../screens/MenuHome';
 import { NotificationScreen } from '../screens/NotificacoesScreen';
 import { SignUpScreen } from '../screens/SignUpScreen';
 import { ViewMotorcycleScreen } from '../screens/ViewMotorcycleScreen';
+import { UserConfig } from '../screens/UserConfig';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="MenuHome"
+      initialRouteName="UserConfig"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
@@ -26,7 +26,7 @@ export default function AppRoutes() {
       <Stack.Screen name="AddMotorcycle" component={AddMotorcycle} />
       <Stack.Screen name="ViewMotorcyclesScreen" component={ViewMotorcycleScreen} />
       <Stack.Screen name="Notifications" component={NotificationScreen} />
-      <Stack.Screen name="MenuHome" component={MenuHome} />
+      <Stack.Screen name="UserConfig" component={UserConfig} />
     </Stack.Navigator>
   );
 }

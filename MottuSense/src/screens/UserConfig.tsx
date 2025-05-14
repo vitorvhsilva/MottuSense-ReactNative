@@ -5,11 +5,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { ScrollView, Switch } from 'react-native';
 
-type MenuHomeProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'MenuHome'>;
+type UserConfigProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList, 'UserConfig'>;
   };
 
-export const MenuHome: React.FC<MenuHomeProps> = ({ navigation }) => {
+export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
   const [alertaEntrar, setAlertaEntrar] = useState(false);
   const [alertaSair, setAlertaSair] = useState(true);
   const [alertaSemPlaca, setAlertaSemPlaca] = useState(true);
@@ -77,7 +77,6 @@ const Container = styled.ScrollView`
   flex: 1;
   background-color: ${theme.colors.branco};
   padding: 20px;
-  padding-top: 60px;
 `;
 
 
@@ -117,6 +116,7 @@ const EditPhotoText = styled.Text`
   font-size: 12px;
   color: ${theme.colors.preto};
   text-align: center;
+  font-family: ${theme.fonts.regular};
 `;
 
 const Section = styled.View`
@@ -133,6 +133,7 @@ const SectionTitle = styled.Text`
 const InfoText = styled.Text`
   font-size: 16px;
   color: ${theme.colors.preto};
+  font-family: ${theme.fonts.regular};
   margin-bottom: 5px;
 `;
 
@@ -150,12 +151,13 @@ const ToggleContainer = styled.View`
 const ToggleLabel = styled.Text`
   flex: 1;
   font-size: 14px;
+  font-family: ${theme.fonts.regular};
   color: ${theme.colors.preto};
 `;
 
 const ResetButton = styled.TouchableOpacity`
   background-color: ${theme.colors.verdeClaro1};
-  padding: 15px;
+  width: 100%;
   border-radius: 30px;
   align-items: center;
   margin-bottom: 40px;
@@ -164,7 +166,8 @@ const ResetButton = styled.TouchableOpacity`
 const ResetButtonText = styled.Text`
   color: ${theme.colors.branco};
   font-family: ${theme.fonts.bold};
-  font-size: ${theme.typography.title.fontSize};
+  font-size: ${theme.typography.subtitle.fontSize};
+  text-align: center;
 `;
 
 const BackButton = styled.TouchableOpacity`
