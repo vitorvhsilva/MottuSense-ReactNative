@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Alert, ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
-import { StyledComponent } from 'styled-components';
 
 type ProfilePictureScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ProfilePictureScreen'>;
 };
 
 export const ProfilePictureScreen: React.FC<ProfilePictureScreenProps> = ({ navigation }) => {
-  const placeholderImage = require('../../assets/imgs/transferir.png');
-  const [photo, setPhoto] = useState<ImageSourcePropType>(placeholderImage);
+  const [photo, setPhoto] = useState<ImageSourcePropType>(
+    require('../../assets/imgs/transferir.png')
+  );
 
   const resetPhoto = () => {
-    setPhoto(placeholderImage);
+    setPhoto(require('../../assets/imgs/transferir.png'));
   };
 
   const handlePickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
       allowsEditing: true,
+      quality: 1,
     });
 
     if (!result.canceled) {
@@ -31,14 +31,7 @@ export const ProfilePictureScreen: React.FC<ProfilePictureScreenProps> = ({ navi
   };
 
   const handleDeleteImage = () => {
-    Alert.alert('Excluir Foto', 'Tem certeza que deseja excluir a foto?', [
-      { text: 'Cancelar', style: 'cancel' },
-      {
-        text: 'Excluir',
-        style: 'destructive',
-        onPress: resetPhoto,
-      },
-    ]);
+    resetPhoto();
   };
 
   return (
@@ -62,7 +55,6 @@ export const ProfilePictureScreen: React.FC<ProfilePictureScreenProps> = ({ navi
   );
 };
 
-// Styled Components
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: black;
@@ -98,20 +90,14 @@ const ProfileImage = styled.Image`
   height: 100%;
 `;
 
-const Placeholder = styled.Image`
-  width: 100px;
-  height: 100px;
-  tint-color: #bbb;
-`;
-
 interface ButtonProps {
   green?: boolean;
   red?: boolean;
 }
 
 const Button = styled.TouchableOpacity<ButtonProps>`
-  background-color: ${(props: StyledComponent) =>
-    props.green ? '#00c247' : props.red ? '#c20000' : '#999'};
+  background-color: ${({ green, red }: ButtonProps) =>
+    green ? '#00c247' : red ? '#c20000' : '#999'};
   padding: 12px 24px;
   border-radius: 20px;
   margin: 8px 0;
