@@ -36,9 +36,9 @@ export const SeeCourtyardScreen: React.FC<SeeCourtyardScreenProps> = ({ navigati
 
     const linesPosition: LinePosition[] = [
         {id: '1', x: 10, y: 10, width: 80, height: 2},
-        {id: '2', x: 10, y: 10, width: 1, height: 190},
-        {id: '3', x: 10, y: 200, width: 80, height: 2},
-        {id: '4', x: 90, y: 10, width: 1, height: 190}
+        {id: '2', x: 10, y: 10, width: 1, height: 300},
+        {id: '3', x: 10, y: 310, width: 80, height: 2},
+        {id: '4', x: 90, y: 10, width: 1, height: 300}
     ]
 
     const getIconByStatus = (status?: string) => {
@@ -82,6 +82,14 @@ export const SeeCourtyardScreen: React.FC<SeeCourtyardScreenProps> = ({ navigati
                     ))}
                 </MotorcycleContainer>
             </CourtyardContainer>
+            <MotorcycleInformation>
+                <MotorcycleInformationHeader>
+                    <MotorcycleInformationBackIcon>
+                        <MotorcycleInformationBackIconImage source={require('../../assets/icons/voltar_branco.png')}/>
+                    </MotorcycleInformationBackIcon>
+                </MotorcycleInformationHeader>
+            </MotorcycleInformation>
+            
         </Container>
     )
 }
@@ -135,3 +143,25 @@ const Line = styled.View`
     background-color: ${theme.colors.preto};
 `
 
+const MotorcycleInformation = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: ${theme.colors.verdeClaro1};
+  padding: 10px;
+`;
+
+const MotorcycleInformationHeader = styled.View`
+    width: 100%;
+    height: fit-content;
+`
+
+const MotorcycleInformationBackIcon = styled.View`
+    width: fit-content;
+    height: fit-content;
+`
+
+const MotorcycleInformationBackIconImage = styled.Image`
+    width: 30px;
+    height: 30px;
+`
