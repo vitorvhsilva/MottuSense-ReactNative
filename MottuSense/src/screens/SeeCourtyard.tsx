@@ -82,13 +82,31 @@ export const SeeCourtyardScreen: React.FC<SeeCourtyardScreenProps> = ({ navigati
                     ))}
                 </MotorcycleContainer>
             </CourtyardContainer>
-            <MotorcycleInformation>
+            <MotorcycleInformationContainer>
                 <MotorcycleInformationHeader>
                     <MotorcycleInformationBackIcon>
                         <MotorcycleInformationBackIconImage source={require('../../assets/icons/voltar_branco.png')}/>
                     </MotorcycleInformationBackIcon>
                 </MotorcycleInformationHeader>
-            </MotorcycleInformation>
+
+                <MotorcycleInformation>
+                    <MotorcycleInformationImage source={require('../../assets/imgs/mottu_pop.png')}/>
+                    <MotorcycleInformationTexts>
+                        <MotorcycleInformationType>Mottu Pop</MotorcycleInformationType>
+                        <MotorcycleInformationText>Placa: ABC-1234</MotorcycleInformationText>
+                        <MotorcycleInformationText>Chassi: 3129312093891</MotorcycleInformationText>
+                        <MotorcycleInformationText>IoT: 231424212312</MotorcycleInformationText>
+                        <MotorcycleInformationText>Status: Pronta para Aluguel</MotorcycleInformationText>
+                    </MotorcycleInformationTexts>
+
+                    <MotorcycleInformationEvents>
+                        <MotorcycleInformationEventsTitle>Últimos 3 Eventos</MotorcycleInformationEventsTitle>
+                        <MotorcycleInformationEvent>Evento 1</MotorcycleInformationEvent>
+                        <MotorcycleInformationEvent>Evento 2</MotorcycleInformationEvent>
+                        <MotorcycleInformationEvent>Evento 3</MotorcycleInformationEvent>
+                    </MotorcycleInformationEvents>
+                </MotorcycleInformation>
+            </MotorcycleInformationContainer>
             
         </Container>
     )
@@ -143,11 +161,11 @@ const Line = styled.View`
     background-color: ${theme.colors.preto};
 `
 
-const MotorcycleInformation = styled.View`
+const MotorcycleInformationContainer = styled.View`
   position: absolute;
   width: 100%;
   height: 100vh;
-  background-color: ${theme.colors.verdeClaro1};
+  background-color: ${theme.colors.verdeEscuro2};
   padding: 10px;
 `;
 
@@ -156,7 +174,7 @@ const MotorcycleInformationHeader = styled.View`
     height: fit-content;
 `
 
-const MotorcycleInformationBackIcon = styled.View`
+const MotorcycleInformationBackIcon = styled.TouchableOpacity`
     width: fit-content;
     height: fit-content;
 `
@@ -165,3 +183,54 @@ const MotorcycleInformationBackIconImage = styled.Image`
     width: 30px;
     height: 30px;
 `
+
+const MotorcycleInformation = styled.View`
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+`;
+
+const MotorcycleInformationImage = styled.Image`
+    width: 150px;
+    height: 150px;
+`
+
+const MotorcycleInformationTexts = styled.View`
+    width: 100%;
+    padding: 20px;
+    height: fit-content;
+`;
+
+const MotorcycleInformationType = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.bold}; 
+  font-size: ${theme.typography.title.fontSize};
+`;
+
+const MotorcycleInformationText = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.regular}; 
+  font-size: ${theme.typography.body.fontSize};
+`;
+
+const MotorcycleInformationEvents = styled.View`
+    width: 100%;
+    padding: 20px;
+    height: fit-content;
+`;
+
+const MotorcycleInformationEventsTitle = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.bold}; 
+  font-size: ${theme.typography.title.fontSize};
+`;
+
+const MotorcycleInformationEvent = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.regular}; 
+  font-size: ${theme.typography.body.fontSize};
+  margin-bottom: 20px;
+`;
