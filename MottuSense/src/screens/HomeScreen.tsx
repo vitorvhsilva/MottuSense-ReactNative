@@ -45,6 +45,24 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                     <SeeCourtyardImage source={require('../../assets/icons/mapa.png')}/>
                 </SeeCourtyard>
             </SeeCourtyardContainer>
+
+            <NavigationIcons>
+                <NavigationIconContainer>
+                    <NavigationIcon>
+                        <NavigationIconImage source={require('../../assets/icons/moto_verde.png')}/>
+                        <NavigationIconImage2 source={require('../../assets/icons/mais.png')}/>
+                    </NavigationIcon>
+                    <NavigationIconText>Adicionar Moto</NavigationIconText>
+                
+                </NavigationIconContainer>
+                <NavigationIconContainer>
+                    <NavigationIcon>
+                        <NavigationIconImage source={require('../../assets/icons/moto_verde.png')}/>
+                        <NavigationIconImage2 source={require('../../assets/icons/editar.png')}/>
+                    </NavigationIcon>
+                    <NavigationIconText>Ver/Atualizar Moto</NavigationIconText>
+                </NavigationIconContainer>
+            </NavigationIcons>
         </Container>
     )
 }
@@ -82,9 +100,58 @@ const SeeCourtyard = styled.TouchableOpacity`
     background-color: ${theme.colors.branco};    
     padding: 50px;
     border-radius: 20px;
-`
+    `
 
 const SeeCourtyardImage = styled.Image`
     width: 50px;
     height: 50px;
+`
+
+const NavigationIcons = styled.View`
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+`
+
+const NavigationIconContainer = styled.View`
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+`
+
+const NavigationIcon = styled.TouchableOpacity`
+    width: 60px;
+    height: 60px;
+    background-color: ${theme.colors.branco};    
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const NavigationIconText = styled.Text`
+    color: ${theme.colors.branco};
+    font-family: ${theme.fonts.regular};
+    font-size: 10px;
+`
+
+const NavigationIconImage = styled.Image`
+    width: 40px;
+    height: 40px;
+`
+
+const NavigationIconImage2 = styled.Image`
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 25px;
+    height: 25px;
 `
