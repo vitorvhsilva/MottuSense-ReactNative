@@ -48,7 +48,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
             <NavigationIcons>
                 <NavigationIconContainer>
-                    <NavigationIcon onPress={() => navigation.navigate('AddMotorcycle')}>
+                    <NavigationIcon onPress={() => navigation.navigate("AddMotorcycle")}>
                         <NavigationIconImage source={require('../../assets/icons/moto_verde.png')}/>
                         <NavigationIconImage2 source={require('../../assets/icons/mais.png')}/>
                     </NavigationIcon>

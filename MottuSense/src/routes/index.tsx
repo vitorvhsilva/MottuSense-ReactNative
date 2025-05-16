@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="AddMotorcycle"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         animation: 'fade',

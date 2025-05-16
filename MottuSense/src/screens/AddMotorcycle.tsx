@@ -31,6 +31,12 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
   return (
     <Container>
       <Scroll>
+        <HeaderContainer>
+          <BackIconContainer onPress={() => navigation.navigate('Home')}>
+            <BackIconImage source={require('../../assets/icons/voltar.png')}/>
+          </BackIconContainer>
+        </HeaderContainer>
+
         <ImageCard>
           <MotoImage source={getImageByType(selectedMotoType)} resizeMode="contain" />
           <MotoInfo>
@@ -76,7 +82,7 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
         <InputAuthComponent label="IoT" value={iot} onChangeText={setIot} />
 
         <SignUpButtonContainer>
-          <SignUpButton onPress={() => navigation.goBack()}>
+          <SignUpButton onPress={() => navigation.navigate('Home')}>
             <ButtonText>Cadastrar</ButtonText>
           </SignUpButton>
         </SignUpButtonContainer>
@@ -89,6 +95,20 @@ const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #ffffff;
 `;
+
+const HeaderContainer = styled.View`
+  width: 100%;
+  height: fit-content;
+  margin: 10px 0px;
+`
+const BackIconContainer = styled.TouchableOpacity`
+  width: fit-content;
+  height: fit-content;
+`
+const BackIconImage = styled.Image`
+  width: 30px;
+  height: 30px;
+`
 
 const Scroll = styled.ScrollView`
   padding: 16px;
