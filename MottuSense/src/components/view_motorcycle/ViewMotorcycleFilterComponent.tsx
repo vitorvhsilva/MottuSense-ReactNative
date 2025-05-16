@@ -1,6 +1,8 @@
 import { useState } from "react";
 import theme from "../../styles/theme";
 import styled from "styled-components/native";
+import { RootStackParamList } from "../../types/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type FilterOption = {
     id: number;
@@ -11,12 +13,15 @@ type ViewMotorcycleFilterComponentProps = {
     filterOptions: FilterOption[];
     selectedFilter: number | null;
     setSelectedFilter: (id: number | null) => void;
+    navigation: NativeStackNavigationProp<RootStackParamList, 'ViewMotorcycle'>;
 }
+
 
 export const ViewMotorcycleFilterComponent = ({ 
     filterOptions,
     selectedFilter, 
-    setSelectedFilter 
+    setSelectedFilter,
+    navigation
 }: ViewMotorcycleFilterComponentProps) => {
     const handleFilterPress = (filterId: number) => {
         setSelectedFilter(selectedFilter === filterId ? null : filterId);
@@ -25,7 +30,9 @@ export const ViewMotorcycleFilterComponent = ({
     
     return (
         <ContainerHeader>
-        <BackImage source={require('../../../assets/icons/voltar.png')}/>
+        <BackImageContainer onPress={() => navigation.navigate("Home")}>
+            <BackImage source={require('../../../assets/icons/voltar.png')}/>
+        </BackImageContainer>
         <FilterContainer>
             <FilterTitle>Filtrar Por</FilterTitle>
             <SelectFilterContainer>
@@ -94,4 +101,9 @@ const SelectFilterText = styled.Text`
     font-family: ${theme.fonts.regular}; 
     font-size: 12px;
     text-align: center;
+`
+
+const BackImageContainer = styled.TouchableOpacity`
+    width: fit-content;
+    height: fit-content;
 `

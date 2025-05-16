@@ -38,6 +38,7 @@ export const ViewMotorcycleScreen: React.FC<ViewMotorcycleScreenProps> = ({ navi
   return (
     <Container>
       <ViewMotorcycleFilterComponent 
+        navigation={navigation}
         filterOptions={filterOptions}
         selectedFilter={selectedFilter}
         setSelectedFilter={handleFilterChange}

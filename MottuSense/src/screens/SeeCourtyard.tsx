@@ -142,7 +142,9 @@ export const SeeCourtyardScreen: React.FC<SeeCourtyardScreenProps> = ({ navigati
     return (
         <Container>
             <HeaderContainer>
-                <BackIcon source={require('../../assets/icons/voltar.png')}/>
+                <BackIconContainer onPress={() => navigation.navigate('Home')}>
+                    <BackIcon source={require('../../assets/icons/voltar.png')}/>
+                </BackIconContainer>
                 <HelpIcon source={require('../../assets/icons/info.png')} />
             </HeaderContainer>
             
@@ -224,6 +226,11 @@ const HeaderContainer = styled.View`
     align-items: center;
     justify-content: space-between;
 `;
+
+const BackIconContainer = styled.TouchableOpacity`
+    width: fit-content;
+    height: fit-content;
+`
 
 const BackIcon = styled.Image`
     width: 30px;

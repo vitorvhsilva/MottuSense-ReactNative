@@ -1,11 +1,19 @@
 import styled from "styled-components/native";
 import theme from "../../styles/theme";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../types/navigation";
 
-export const HomeHeaderComponent = () => {
+type HomeHeaderProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+};
+
+export const HomeHeaderComponent = ({ navigation }: HomeHeaderProps) => {
     return (
         <HeaderContainer>
             <Menu>
-                <MenuIcon source={require('../../../assets/icons/menu_hamburguer.png')}/>
+                <MenuIconContainer onPress={() => navigation.navigate('UserConfig')}>
+                    <MenuIcon source={require('../../../assets/icons/menu_hamburguer.png')}/>
+                </MenuIconContainer>
             </Menu>
 
             <UserInfo>
@@ -17,7 +25,9 @@ export const HomeHeaderComponent = () => {
             </UserInfo>
 
             <Notification>
-                <NotificationIcon source={require('../../../assets/icons/notification.png')}/>
+                <NotificationIconContainer onPress={() => navigation.navigate('Notifications')}>
+                    <NotificationIcon source={require('../../../assets/icons/notification.png')}/>
+                </NotificationIconContainer>
                 <NotificationCount>
                     <NotificationCountText>1</NotificationCountText>
                 </NotificationCount>
@@ -36,6 +46,16 @@ const HeaderContainer = styled.View`
     align-items: center;
 `;
 
+const MenuIconContainer = styled.TouchableOpacity`
+    width: fit-content;
+    width: fit-content;
+`
+
+const NotificationIconContainer = styled.TouchableOpacity`
+    width: fit-content;
+    width: fit-content;
+`
+
 const Menu = styled.View`
     width: 20%;
     height: fit-content;
@@ -45,8 +65,8 @@ const Menu = styled.View`
 `
 
 const MenuIcon = styled.Image`
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 `
 
 const UserInfo = styled.View`

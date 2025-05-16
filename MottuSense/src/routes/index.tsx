@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Auth"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
@@ -25,7 +25,7 @@ export default function AppRoutes() {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="AddMotorcycle" component={AddMotorcycle} />
-      <Stack.Screen name="ViewMotorcyclesScreen" component={ViewMotorcycleScreen} />
+      <Stack.Screen name="ViewMotorcycle" component={ViewMotorcycleScreen} />
       <Stack.Screen name="Notifications" component={NotificationScreen} />
       <Stack.Screen name="UserConfig" component={UserConfig} />
       <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} />

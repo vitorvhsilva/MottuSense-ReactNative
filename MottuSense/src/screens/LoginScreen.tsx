@@ -36,7 +36,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 <InputAuthComponent label='Senha' value={senha} onChangeText={setSenha}/>
 
                 <LoginButtonContainer>
-                    <LoginButton onPress={() => navigation.navigate('Login')}>
+                    <LoginButton onPress={() => navigation.navigate('Home')}>
                         <ButtonText>Acessar</ButtonText>
                     </LoginButton>
                 </LoginButtonContainer>
@@ -49,7 +49,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
 const Container = styled.ScrollView`
     background-color: ${theme.colors.preto};
-    height: 100vh;
+    height: fit-content;
 `;
 
 const HomeContainer = styled.View `
@@ -90,7 +90,7 @@ const LoginContainer = styled.View`
     padding: 30px;
     background-color: ${theme.colors.branco};
     width: 100%;
-    height: 50vh;
+    height: fit-content;
     padding-top: 70px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;

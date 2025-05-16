@@ -31,7 +31,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     
     return (
         <Container>
-            <HomeHeaderComponent/>
+            <HomeHeaderComponent navigation={navigation}/>
             <HomeSelectBranchComponent
                 branches={branches}
                 selectedBranch={selectedBranch}
@@ -41,14 +41,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             />
             <SeeCourtyardContainer>
                 <SeeCourtyardTitle>Veja o pátio da <GreenText>Filial</GreenText> em tempo real</SeeCourtyardTitle>
-                <SeeCourtyard>
+                <SeeCourtyard onPress={() => navigation.navigate('SeeCourtyard')}>
                     <SeeCourtyardImage source={require('../../assets/icons/mapa.png')}/>
                 </SeeCourtyard>
             </SeeCourtyardContainer>
 
             <NavigationIcons>
                 <NavigationIconContainer>
-                    <NavigationIcon>
+                    <NavigationIcon onPress={() => navigation.navigate('AddMotorcycle')}>
                         <NavigationIconImage source={require('../../assets/icons/moto_verde.png')}/>
                         <NavigationIconImage2 source={require('../../assets/icons/mais.png')}/>
                     </NavigationIcon>
@@ -56,7 +56,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 
                 </NavigationIconContainer>
                 <NavigationIconContainer>
-                    <NavigationIcon>
+                    <NavigationIcon onPress={() => navigation.navigate('ViewMotorcycle')}>
                         <NavigationIconImage source={require('../../assets/icons/moto_verde.png')}/>
                         <NavigationIconImage2 source={require('../../assets/icons/editar.png')}/>
                     </NavigationIcon>

@@ -38,7 +38,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
                 <InputAuthComponent label='CEP' value={cep} onChangeText={setCep}/>
 
                 <SignUpButtonContainer>
-                    <SignUpButton onPress={() => navigation.navigate('SignUp')}>
+                    <SignUpButton onPress={() => navigation.navigate('Home')}>
                         <ButtonText>Cadastrar</ButtonText>
                     </SignUpButton>
                 </SignUpButtonContainer>
