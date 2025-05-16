@@ -8,27 +8,41 @@ import { SignUpScreen } from '../screens/SignUpScreen';
 import { ViewMotorcycleScreen } from '../screens/ViewMotorcycleScreen';
 import { UserConfig } from '../screens/UserConfig';
 import { SeeCourtyardScreen } from '../screens/SeeCourtyard';
+import { useAuth } from '../contexts/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppRoutes() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return null; 
+  }
+
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Auth"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
       }}
     >
-      <Stack.Screen name="Auth" component={AuthScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="AddMotorcycle" component={AddMotorcycle} />
-      <Stack.Screen name="ViewMotorcycle" component={ViewMotorcycleScreen} />
-      <Stack.Screen name="Notifications" component={NotificationScreen} />
-      <Stack.Screen name="UserConfig" component={UserConfig} />
-      <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} />
+      {!user ? (
+        <>
+          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} /> 
+        </>
+        ) : (
+        <>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="AddMotorcycle" component={AddMotorcycle} />
+          <Stack.Screen name="ViewMotorcycle" component={ViewMotorcycleScreen} />
+          <Stack.Screen name="Notifications" component={NotificationScreen} />
+          <Stack.Screen name="UserConfig" component={UserConfig} />
+          <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} /> 
+        </>
+      )}
     </Stack.Navigator>
   );
 }
