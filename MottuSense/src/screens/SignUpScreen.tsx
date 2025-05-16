@@ -144,7 +144,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
 
             await register(cadastro);
 
-            navigation.navigate('Login');
+            navigation.navigate('Home');
         } catch (err) {
             console.log('Erro completo:', err);
             

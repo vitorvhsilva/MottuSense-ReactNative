@@ -12,46 +12,50 @@ let usuarioSalvos: Usuario[] = []
 export const authService = {
 
     async loadRegisteredUsers(): Promise<void> {
-        try {
-            const usersJson = await AsyncStorage.getItem(STORAGE_KEYS.REGISTERED_USERS);
-            if (usersJson) {
-            usuarioSalvos = JSON.parse(usersJson);
-            }
-        } catch (error) {
-            console.error('Erro ao carregar usuários registrados:', error);
+      try {
+        const usersJson = await AsyncStorage.getItem(STORAGE_KEYS.REGISTERED_USERS);
+        if (usersJson) {
+          usuarioSalvos = JSON.parse(usersJson);
+          console.log(usuarioSalvos)
         }
+      } catch (error) {
+        console.error('Erro ao carregar usuários registrados:', error);
+      }
     },
 
     async signIn(login: Login): Promise<AuthResponse> {
         const usuario: Usuario | undefined = usuarioSalvos.find(
-            (u) => u.email === login.email
+          (u) => u.email === login.email
         );
         if (usuario?.senha === login.senha && usuario?.senha === login.senha) {
-            return {
-                usuario: usuario,
-                token: usuario.id,
-            };
+          return {
+            usuario: usuario,
+            token: usuario.id,
+          };
         }
         throw new Error('Email ou senha inválidos');
     },
 
   async register(data: Cadastro): Promise<AuthResponse> {
     if (
-        usuarioSalvos.some((u) => u.email === data.email)
+      usuarioSalvos.some((u) => u.email === data.email)
     ) {
-        throw new Error('Email já está em uso');
+      throw new Error('Email já está em uso');
     }
 
     const novoUsuario: Usuario = {
-        id: `${usuarioSalvos.length + 1}`,
-        nome: data.nome,
-        cpf: data.cpf,
-        telefone: data.telefone,
-        email: data.email,
-        senha: data.senha,
-        dataNascimento: data.dataNascimento,
-        cep: data.cep
+      id: `${usuarioSalvos.length + 1}`,
+      nome: data.nome,
+      cpf: data.cpf,
+      telefone: data.telefone,
+      email: data.email,
+      senha: data.senha,
+      dataNascimento: data.dataNascimento,
+      cep: data.cep
     };
+
+    console.log('Novo usuário adicionado:', novoUsuario); 
+    console.log('Lista atualizada:', usuarioSalvos); 
 
     usuarioSalvos.push(novoUsuario);
 

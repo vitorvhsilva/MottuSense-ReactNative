@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
-import AppRoutes from './src/routes';
+import { AppRoutes } from './src/routes';
 import theme from './src/styles/theme';
 import { ActivityIndicator, StatusBar } from 'react-native';
 import { Poppins_400Regular, Poppins_700Bold, useFonts } from '@expo-google-fonts/poppins';
@@ -21,14 +21,12 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <NavigationContainer>
-          <StatusBar 
-            barStyle="light-content" 
-            backgroundColor={theme.colors.preto} 
-          />
-          <AppRoutes />
-          <Toast />
-        </NavigationContainer>
+        <StatusBar 
+          barStyle="light-content" 
+          backgroundColor={theme.colors.preto} 
+        />
+        <AppRoutes />
+        <Toast />
       </AuthProvider>
     </ThemeProvider>
   );

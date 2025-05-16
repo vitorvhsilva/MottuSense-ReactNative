@@ -9,10 +9,12 @@ import { ViewMotorcycleScreen } from '../screens/ViewMotorcycleScreen';
 import { UserConfig } from '../screens/UserConfig';
 import { SeeCourtyardScreen } from '../screens/SeeCourtyard';
 import { useAuth } from '../contexts/AuthContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootStackParamList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function AppRoutes() {
+export const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -20,29 +22,31 @@ export default function AppRoutes() {
   }
 
   return (
-    <Stack.Navigator
-      initialRouteName="SignUp"
-      screenOptions={{
-        headerShown: false,
-        animation: 'fade',
-      }}
-    >
-      {!user ? (
-        <>
-          <Stack.Screen name="Auth" component={AuthScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} /> 
-        </>
-        ) : (
-        <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="AddMotorcycle" component={AddMotorcycle} />
-          <Stack.Screen name="ViewMotorcycle" component={ViewMotorcycleScreen} />
-          <Stack.Screen name="Notifications" component={NotificationScreen} />
-          <Stack.Screen name="UserConfig" component={UserConfig} />
-          <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} /> 
-        </>
-      )}
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName={user ? 'Home' : 'Auth'}
+        screenOptions={{
+          headerShown: false,
+          animation: 'fade',
+        }}
+      >
+        {!user ? (
+          <>
+            <Stack.Screen name="Auth" component={AuthScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} /> 
+          </>
+          ) : (
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="AddMotorcycle" component={AddMotorcycle} />
+            <Stack.Screen name="ViewMotorcycle" component={ViewMotorcycleScreen} />
+            <Stack.Screen name="Notifications" component={NotificationScreen} />
+            <Stack.Screen name="UserConfig" component={UserConfig} />
+            <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} /> 
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
