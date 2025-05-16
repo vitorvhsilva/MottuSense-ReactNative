@@ -5,6 +5,7 @@ import theme from "../styles/theme";
 import { HomeHeaderComponent } from "../components/home/HomeHeaderComponent";
 import { HomeSelectBranchComponent } from "../components/home/HomeSelectBranchComponent";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 type HomeScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -16,6 +17,9 @@ type Branch = {
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+    const { user } = useAuth()
+    console.log(user)
+
     const [selectedBranch, setSelectedBranch] = useState<string>("Butantã");
     const [viewBranchs, setViewBranchs] = useState(false);
 
@@ -31,7 +35,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     
     return (
         <Container>
-            <HomeHeaderComponent navigation={navigation}/>
+            <HomeHeaderComponent navigation={navigation} usuario={user}/>
             <HomeSelectBranchComponent
                 branches={branches}
                 selectedBranch={selectedBranch}

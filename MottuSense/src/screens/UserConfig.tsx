@@ -12,7 +12,7 @@ type UserConfigProps = {
   };
 
 export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
 
   const [alertaEntrar, setAlertaEntrar] = useState(false);
   const [alertaSair, setAlertaSair] = useState(true);
@@ -39,10 +39,10 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
 
       <Section>
         <SectionTitle>Informações Pessoais</SectionTitle>
-        <InfoText><BoldText>Nome:</BoldText> Vitor Hugo da Silva</InfoText>
-        <InfoText><BoldText>CPF:</BoldText> 00000000000</InfoText>
-        <InfoText><BoldText>Telefone:</BoldText> 11999999999</InfoText>
-        <InfoText><BoldText>Data de Nascimento:</BoldText> 01/01/0001</InfoText>
+        <InfoText><BoldText>Nome:</BoldText> {user?.nome}</InfoText>
+        <InfoText><BoldText>CPF:</BoldText> {user?.cpf}</InfoText>
+        <InfoText><BoldText>Telefone:</BoldText> {user?.telefone}</InfoText>
+        <InfoText><BoldText>Data de Nascimento:</BoldText> {user?.dataNascimento ? new Date(user.dataNascimento).toLocaleDateString('pt-BR') : 'Não informada'}</InfoText>
       </Section>
 
       <Section>

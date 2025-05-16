@@ -2,12 +2,20 @@ import styled from "styled-components/native";
 import theme from "../../styles/theme";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/navigation";
+import { Usuario } from "../../types/auth";
 
 type HomeHeaderProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+  usuario: Usuario | null 
 };
 
-export const HomeHeaderComponent = ({ navigation }: HomeHeaderProps) => {
+export const HomeHeaderComponent = ({ navigation, usuario }: HomeHeaderProps) => {
+    
+
+    const nomeParts = usuario!!.nome.trim().split(' ');
+    const firstName = nomeParts[0];
+    const lastName = nomeParts.length > 1 ? nomeParts.slice(1).join(' ') : '';
+
     return (
         <HeaderContainer>
             <Menu>
@@ -19,8 +27,8 @@ export const HomeHeaderComponent = ({ navigation }: HomeHeaderProps) => {
             <UserInfo>
                 <UserIcon source={require('../../../assets/icons/usuario_default.png')} />
                 <UserTexts>
-                    <UserFirstName>Vitor</UserFirstName>
-                    <UserLastName>Hugo da Silva</UserLastName>
+                    <UserFirstName>{firstName}</UserFirstName>
+                    <UserLastName>{lastName}</UserLastName>
                 </UserTexts>
             </UserInfo>
 
