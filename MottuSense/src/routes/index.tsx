@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function AppRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="Auth"
+      initialRouteName="AddMotorcycle"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
