@@ -4,12 +4,16 @@ import theme from '../styles/theme';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { ScrollView, Switch } from 'react-native';
+import { useAuth } from '../contexts/AuthContext';
+
 
 type UserConfigProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'UserConfig'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'UserConfig'>;
   };
 
 export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
+  const { signOut, user } = useAuth()
+
   const [alertaEntrar, setAlertaEntrar] = useState(false);
   const [alertaSair, setAlertaSair] = useState(true);
   const [alertaSemPlaca, setAlertaSemPlaca] = useState(true);
@@ -35,10 +39,10 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
 
       <Section>
         <SectionTitle>Informações Pessoais</SectionTitle>
-        <InfoText><BoldText>Nome:</BoldText> Vitor Hugo da Silva</InfoText>
-        <InfoText><BoldText>CPF:</BoldText> 00000000000</InfoText>
-        <InfoText><BoldText>Telefone:</BoldText> 11999999999</InfoText>
-        <InfoText><BoldText>Data de Nascimento:</BoldText> 01/01/0001</InfoText>
+        <InfoText><BoldText>Nome:</BoldText> {user?.nome}</InfoText>
+        <InfoText><BoldText>CPF:</BoldText> {user?.cpf}</InfoText>
+        <InfoText><BoldText>Telefone:</BoldText> {user?.telefone}</InfoText>
+        <InfoText><BoldText>Data de Nascimento:</BoldText> {user?.dataNascimento ? new Date(user.dataNascimento).toLocaleDateString('pt-BR') : 'Não informada'}</InfoText>
       </Section>
 
       <Section>
@@ -53,6 +57,10 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
       <ResetButton>
         <ResetButtonText>Redefinir seu nome ou senha</ResetButtonText>
       </ResetButton>
+
+      <SignOutButton onPress={() => signOut()}>
+        <SignOutText>Sair da conta</SignOutText>
+      </SignOutButton>
     </Container>
   );
 };
@@ -178,4 +186,20 @@ const BackButton = styled.TouchableOpacity`
 const BackIcon = styled.Image`
   width: 28px;
   height: 28px;
+`;
+
+const SignOutButton = styled.TouchableOpacity`
+  background-color: ${theme.colors.vermelho};
+  width: 100%;
+  border-radius: 30px;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 10px;
+`;
+
+const SignOutText = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.bold};
+  font-size: ${theme.typography.subtitle.fontSize};
+  text-align: center;
 `;

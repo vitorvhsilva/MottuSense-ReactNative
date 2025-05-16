@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
-import AppRoutes from './src/routes';
+import { AppRoutes } from './src/routes';
 import theme from './src/styles/theme';
 import { ActivityIndicator, StatusBar } from 'react-native';
 import { Poppins_400Regular, Poppins_700Bold, useFonts } from '@expo-google-fonts/poppins';
+import Toast from 'react-native-toast-message';
+import { AuthProvider } from './src/contexts/AuthContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,13 +20,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
+      <AuthProvider>
         <StatusBar 
           barStyle="light-content" 
           backgroundColor={theme.colors.preto} 
         />
         <AppRoutes />
-      </NavigationContainer>
+        <Toast />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

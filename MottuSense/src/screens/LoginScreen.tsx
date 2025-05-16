@@ -4,14 +4,43 @@ import styled from 'styled-components/native';
 import { InputAuthComponent } from '../components/InputAuthComponent';
 import theme from "../styles/theme";
 import { RootStackParamList } from '../types/navigation';
+import { useAuth } from '../contexts/AuthContext';
+import Toast from 'react-native-toast-message';
 
 type LoginScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;
 };
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+    const { signIn } = useAuth()
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+
+    const handleLogin = async () => {
+        try {
+            await signIn({ email, senha });
+
+            navigation.navigate('Home')
+        } catch (err) {
+            console.log('Erro completo:', err);
+            
+            let errorMessage = 'Erro ao criar conta';
+            
+            if (err instanceof Error) {
+                errorMessage = err.message;
+            } else if (typeof err === 'string') {
+                errorMessage = err;
+            }
+
+            Toast.show({
+                type: 'error',
+                text1: 'Erro no cadastro',
+                text2: errorMessage,
+                position: 'top',
+                visibilityTime: 4000
+            });
+        } 
+    };
 
     return (
         <Container>
@@ -36,7 +65,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 <InputAuthComponent label='Senha' value={senha} onChangeText={setSenha}/>
 
                 <LoginButtonContainer>
-                    <LoginButton onPress={() => navigation.navigate('Home')}>
+                    <LoginButton onPress={() => handleLogin()}>
                         <ButtonText>Acessar</ButtonText>
                     </LoginButton>
                 </LoginButtonContainer>
@@ -91,7 +120,7 @@ const LoginContainer = styled.View`
     background-color: ${theme.colors.branco};
     width: 100%;
     height: fit-content;
-    padding-top: 70px;
+    padding-top: 100px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 0;
