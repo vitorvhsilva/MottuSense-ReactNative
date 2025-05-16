@@ -87,15 +87,15 @@ const Notification = styled.View`
 `
 
 const NotificationIcon = styled.Image`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 `
 
 const NotificationCount = styled.View`
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 100%;
-    top: -10px;
+    top: -5px;
     right: 5px;
     z-index: 10;
     background-color: ${theme.colors.verdeClaro1};
