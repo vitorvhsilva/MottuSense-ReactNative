@@ -6,6 +6,7 @@ import theme from './src/styles/theme';
 import { ActivityIndicator, StatusBar } from 'react-native';
 import { Poppins_400Regular, Poppins_700Bold, useFonts } from '@expo-google-fonts/poppins';
 import Toast from 'react-native-toast-message';
+import { AuthProvider } from './src/contexts/AuthContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,14 +20,16 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar 
-          barStyle="light-content" 
-          backgroundColor={theme.colors.preto} 
-        />
-        <AppRoutes />
-        <Toast />
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+          <StatusBar 
+            barStyle="light-content" 
+            backgroundColor={theme.colors.preto} 
+          />
+          <AppRoutes />
+          <Toast />
+        </NavigationContainer>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

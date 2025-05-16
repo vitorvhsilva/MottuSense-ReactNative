@@ -24,10 +24,28 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
     const [dataNasc, setDataNasc] = useState("");
     const [cep, setCep] = useState("");
 
+    const validateCPF = (cpf: string): boolean => {
+        const cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
+        return cpfRegex.test(cpf);
+    };
+
+    const validateCEP = (cep: string): boolean => {
+        const cepRegex = /^\d{5}-?\d{3}$/;
+        return cepRegex.test(cep);
+    };
+
+    const validateEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validatePhone = (phone: string): boolean => {
+        const phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/;
+        return phoneRegex.test(phone);
+    };
 
     const handleRegister = async () => {
         try {
-            //setLoading(true);
 
             if (!nomeCompleto || !cpf || !telefone || !email || !senha 
                 || !confirmarSenha || !dataNasc || !cep) {
@@ -37,17 +55,73 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
                     text2: 'Por favor, preencha todos os campos',
                     position: 'top',
                     visibilityTime: 3000
-                });('Por favor, preencha todos os campos');
+                });
                 return;
             }
 
-            if (!(senha == confirmarSenha)) {
-                //setError('As senhas não coincidem');
+            if (!validateCPF(cpf)) {
+                Toast.show({
+                    type: 'error',
+                    text1: 'CPF inválido',
+                    text2: 'Digite um CPF válido (123.456.789-09 ou 12345678909)',
+                    position: 'top',
+                    visibilityTime: 3000
+                });
+                return;
+            }
+
+            if (!validateCEP(cep)) {
+                Toast.show({
+                    type: 'error',
+                    text1: 'CEP inválido',
+                    text2: 'Digite um CEP válido (12345-678 ou 12345678)',
+                    position: 'top',
+                    visibilityTime: 3000
+                });
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                Toast.show({
+                    type: 'error',
+                    text1: 'Email inválido',
+                    text2: 'Digite um email válido (exemplo@dominio.com)',
+                    position: 'top',
+                    visibilityTime: 3000
+                });
+                return;
+            }
+
+            if (!validatePhone(telefone)) {
+                Toast.show({
+                    type: 'error',
+                    text1: 'Telefone inválido',
+                    text2: 'Digite um telefone válido ((11) 91234-5678 ou 11912345678)',
+                    position: 'top',
+                    visibilityTime: 3000
+                });
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                Toast.show({
+                    type: 'error',
+                    text1: 'Erro no formulário',
+                    text2: 'As senhas não coincidem',
+                    position: 'top',
+                    visibilityTime: 3000
+                });
                 return;
             }
 
             if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dataNasc)) {
-                //setError('Formato de data inválido. Use DD/MM/AAAA');
+                Toast.show({
+                    type: 'error',
+                    text1: 'Erro no formulário',
+                    text2: 'Data de Nascimento no formato errado (DD/MM/AAAA)',
+                    position: 'top',
+                    visibilityTime: 3000
+                });
                 return;
             }
 
@@ -72,10 +146,24 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
 
             navigation.navigate('Login');
         } catch (err) {
-           // setError('Erro ao criar conta. Tente novamente.');
-        } finally {
-            //setLoading(false);
-        }
+            console.log('Erro completo:', err);
+            
+            let errorMessage = 'Erro ao criar conta';
+            
+            if (err instanceof Error) {
+                errorMessage = err.message;
+            } else if (typeof err === 'string') {
+                errorMessage = err;
+            }
+
+            Toast.show({
+                type: 'error',
+                text1: 'Erro no cadastro',
+                text2: errorMessage,
+                position: 'top',
+                visibilityTime: 4000
+            });
+        } 
     };
 
     return (
