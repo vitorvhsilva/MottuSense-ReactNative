@@ -21,7 +21,7 @@ export default function AppRoutes() {
 
   return (
     <Stack.Navigator
-      initialRouteName="Auth"
+      initialRouteName="SignUp"
       screenOptions={{
         headerShown: false,
         animation: 'fade',

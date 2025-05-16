@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import Toast from 'react-native-toast-message';
 import styled from 'styled-components/native';
 import theme from "../styles/theme";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { InputAuthComponent } from '../components/InputAuthComponent';
+import { useAuth } from '../contexts/AuthContext';
+import { Cadastro } from '../types/auth';
 
 type SignUpScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
 };
 
 export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
+    const { register } = useAuth();
+
     const [nomeCompleto, setNomeCompleto] = useState("");
     const [cpf, setCpf] = useState("");
     const [telefone, setTelefone] = useState("");
@@ -18,6 +23,60 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [dataNasc, setDataNasc] = useState("");
     const [cep, setCep] = useState("");
+
+
+    const handleRegister = async () => {
+        try {
+            //setLoading(true);
+
+            if (!nomeCompleto || !cpf || !telefone || !email || !senha 
+                || !confirmarSenha || !dataNasc || !cep) {
+                Toast.show({
+                    type: 'error',
+                    text1: 'Erro no formulário',
+                    text2: 'Por favor, preencha todos os campos',
+                    position: 'top',
+                    visibilityTime: 3000
+                });('Por favor, preencha todos os campos');
+                return;
+            }
+
+            if (!(senha == confirmarSenha)) {
+                //setError('As senhas não coincidem');
+                return;
+            }
+
+            if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dataNasc)) {
+                //setError('Formato de data inválido. Use DD/MM/AAAA');
+                return;
+            }
+
+            const partesData = dataNasc.split('/');
+            const dataObj = new Date(
+                parseInt(partesData[2]),
+                parseInt(partesData[1]) - 1, 
+                parseInt(partesData[0])
+            );
+
+            const cadastro: Cadastro = {
+                nome: nomeCompleto,
+                cep: cep,
+                cpf: cpf,
+                dataNascimento: dataObj,
+                email: email,
+                senha: senha,
+                telefone: telefone
+            }
+
+            await register(cadastro);
+
+            navigation.navigate('Login');
+        } catch (err) {
+           // setError('Erro ao criar conta. Tente novamente.');
+        } finally {
+            //setLoading(false);
+        }
+    };
 
     return (
         <Container>
@@ -38,10 +97,11 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
                 <InputAuthComponent label='CEP' value={cep} onChangeText={setCep}/>
 
                 <SignUpButtonContainer>
-                    <SignUpButton onPress={() => navigation.navigate('Home')}>
+                    <SignUpButton onPress={() => handleRegister()}>
                         <ButtonText>Cadastrar</ButtonText>
                     </SignUpButton>
                 </SignUpButtonContainer>
+
             </SignUpContainer>
 
         </Container>
