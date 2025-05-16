@@ -4,12 +4,16 @@ import theme from '../styles/theme';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { ScrollView, Switch } from 'react-native';
+import { useAuth } from '../contexts/AuthContext';
+
 
 type UserConfigProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'UserConfig'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'UserConfig'>;
   };
 
 export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
+  const { signOut } = useAuth()
+
   const [alertaEntrar, setAlertaEntrar] = useState(false);
   const [alertaSair, setAlertaSair] = useState(true);
   const [alertaSemPlaca, setAlertaSemPlaca] = useState(true);
@@ -53,6 +57,10 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
       <ResetButton>
         <ResetButtonText>Redefinir seu nome ou senha</ResetButtonText>
       </ResetButton>
+
+      <SignOutButton onPress={() => signOut()}>
+        <SignOutText>Sair da conta</SignOutText>
+      </SignOutButton>
     </Container>
   );
 };
@@ -178,4 +186,20 @@ const BackButton = styled.TouchableOpacity`
 const BackIcon = styled.Image`
   width: 28px;
   height: 28px;
+`;
+
+const SignOutButton = styled.TouchableOpacity`
+  background-color: ${theme.colors.vermelho};
+  width: 100%;
+  border-radius: 30px;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 10px;
+`;
+
+const SignOutText = styled.Text`
+  color: ${theme.colors.branco};
+  font-family: ${theme.fonts.bold};
+  font-size: ${theme.typography.subtitle.fontSize};
+  text-align: center;
 `;

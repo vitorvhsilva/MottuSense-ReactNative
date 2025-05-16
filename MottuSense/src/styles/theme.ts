@@ -6,7 +6,8 @@ export default {
     verdeEscuro2: '#003910',
     preto: '#070707',
     branco: '#FFFFFF',
-    cinza: '#D9D9D9'
+    cinza: '#D9D9D9',
+    vermelho: '#8C1D18'
   },
   fonts: {
     regular: 'Poppins_400Regular',
