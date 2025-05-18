@@ -29,8 +29,8 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
       </BackButton>
 
       <AvatarSection>
-          <AvatarContainer>
-          <Avatar source={require('../../assets/icons/usuario_default.png')} />
+          <AvatarContainer onPress={() => navigation.navigate('ProfilePicture')}>
+            <Avatar source={require('../../assets/icons/usuario_default.png')} />
           </AvatarContainer>
           <EditPhotoText>Visualizar ou Editar Foto</EditPhotoText>
       </AvatarSection>
@@ -101,7 +101,7 @@ const AvatarSection = styled.View`
 `;
 
 
-const AvatarContainer = styled.View`
+const AvatarContainer = styled.TouchableOpacity`
   width: 50px;
   height: 50px;
   border-radius: 25px;

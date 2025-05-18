@@ -10,7 +10,7 @@ type ProfilePictureScreenProps = {
 export const ProfilePictureScreen: React.FC<ProfilePictureScreenProps> = ({ navigation }) => {
     return (
         <Container>
-            <BackIconContainer>
+            <BackIconContainer onPress={() => navigation.navigate("UserConfig")}>
                 <BackIconImage source={require('../../assets/icons/voltar.png')}/>
             </BackIconContainer>
 
