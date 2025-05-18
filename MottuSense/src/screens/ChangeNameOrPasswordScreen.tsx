@@ -17,7 +17,7 @@ export const ChangeNameOrPasswordScreen: React.FC<ChangeNameOrPasswordProps> = (
     
     return (
         <Container>
-            <BackButton onPress={() => navigation.navigate('Auth')}>
+            <BackButton onPress={() => navigation.navigate('UserConfig')}>
                 <BackIcon 
                     source={require('../../assets/icons/voltar.png')}
                     resizeMode="contain"

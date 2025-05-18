@@ -54,8 +54,8 @@ export const UserConfig: React.FC<UserConfigProps> = ({ navigation }) => {
         <ToggleItem label="Receber alerta se uma Moto estiver pronta para ser alugada" value={alertaPronta} onValueChange={setAlertaPronta} />
       </Section>
 
-      <ResetButton>
-        <ResetButtonText>Redefinir seu nome ou senha</ResetButtonText>
+      <ResetButton onPress={() => navigation.navigate('ChangeNameOrPassword')}>
+        <ResetButtonText>Redefinir seu Nome ou Senha</ResetButtonText>
       </ResetButton>
 
       <SignOutButton onPress={() => signOut()}>
@@ -163,6 +163,7 @@ const ToggleLabel = styled.Text`
 const ResetButton = styled.TouchableOpacity`
   background-color: ${theme.colors.verdeClaro1};
   width: 100%;
+  padding: 5px;
   border-radius: 30px;
   align-items: center;
   margin-bottom: 40px;
