@@ -26,7 +26,7 @@ export const AppRoutes: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={user ? 'ChangeNameOrPassword' : 'Auth'}
+        initialRouteName={user ? 'Home' : 'Auth'}
         screenOptions={{
           headerShown: false,
           animation: 'fade',
