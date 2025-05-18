@@ -11,6 +11,7 @@ import { SeeCourtyardScreen } from '../screens/SeeCourtyard';
 import { useAuth } from '../contexts/AuthContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackParamList } from '../types/navigation';
+import { ProfilePictureScreen } from '../screens/ProfilePictureScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,7 +25,7 @@ export const AppRoutes: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={user ? 'Home' : 'Auth'}
+        initialRouteName={user ? 'ProfilePicture' : 'Auth'}
         screenOptions={{
           headerShown: false,
           animation: 'fade',
@@ -44,6 +45,7 @@ export const AppRoutes: React.FC = () => {
             <Stack.Screen name="Notifications" component={NotificationScreen} />
             <Stack.Screen name="UserConfig" component={UserConfig} />
             <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} /> 
+            <Stack.Screen name="ProfilePicture" component={ProfilePictureScreen} /> 
           </>
         )}
       </Stack.Navigator>

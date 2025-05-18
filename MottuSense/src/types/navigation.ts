@@ -8,4 +8,5 @@ export type RootStackParamList = {
   Notifications: undefined;
   UserConfig: undefined;
   SeeCourtyard: undefined;
+  ProfilePicture: undefined;
 };
