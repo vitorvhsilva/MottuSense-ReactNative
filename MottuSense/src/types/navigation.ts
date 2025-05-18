@@ -9,4 +9,5 @@ export type RootStackParamList = {
   UserConfig: undefined;
   SeeCourtyard: undefined;
   ProfilePicture: undefined;
+  ChangeNameOrPassword: undefined;
 };

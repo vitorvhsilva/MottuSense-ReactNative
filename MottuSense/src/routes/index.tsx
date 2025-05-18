@@ -12,6 +12,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackParamList } from '../types/navigation';
 import { ProfilePictureScreen } from '../screens/ProfilePictureScreen';
+import { ChangeNameOrPasswordScreen } from '../screens/ChangeNameOrPasswordScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,7 +26,7 @@ export const AppRoutes: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={user ? 'ProfilePicture' : 'Auth'}
+        initialRouteName={user ? 'ChangeNameOrPassword' : 'Auth'}
         screenOptions={{
           headerShown: false,
           animation: 'fade',
@@ -46,6 +47,7 @@ export const AppRoutes: React.FC = () => {
             <Stack.Screen name="UserConfig" component={UserConfig} />
             <Stack.Screen name="SeeCourtyard" component={SeeCourtyardScreen} /> 
             <Stack.Screen name="ProfilePicture" component={ProfilePictureScreen} /> 
+            <Stack.Screen name="ChangeNameOrPassword" component={ChangeNameOrPasswordScreen} /> 
           </>
         )}
       </Stack.Navigator>
