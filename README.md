@@ -1,5 +1,8 @@
 # MottuSense - Mapeamento Inteligente do Pátio e Gestão das Motos
 
+## Figma do Projeto
+<a> https://www.figma.com/design/cmULc45tgBYnrHS2URh58d/MottuSense?node-id=0-1&t=4uKWdg6NpRxDaUzx-1 </a>
+
 ## Integrantes
 | Nome Completo         | RM      |
 |-----------------------|---------|
