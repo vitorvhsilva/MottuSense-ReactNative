@@ -123,6 +123,27 @@ export const ViewMotorcyclesComponent = ({
     }
   };
 
+  const handleDeleteMotorcycle = async () => {
+    if (!editingMotorcycle) return;
+
+    try {
+      const response = await fetch(`https://localhost:7050/api/v1/motos/${editingMotorcycle.idMoto}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Erro ao deletar moto");
+
+      alert("Moto deletada com sucesso!");
+      setExpandedId(null);
+      setEditingMotorcycle(null);
+      onRefresh(); 
+    } catch (error) {
+      console.error("Erro ao deletar moto:", error);
+      alert("Erro ao deletar moto");
+    }
+  };
+
+
   return (
     <Container>
       {filteredMotorcycles.map((motorcycle) => (
@@ -180,6 +201,12 @@ export const ViewMotorcyclesComponent = ({
               <MotorcycleButtonContainer>
                 <MotorcycleButton onPress={handleUpdateMotorcycle}>
                   <MotorcycleButtonText>Editar</MotorcycleButtonText>
+                </MotorcycleButton>
+                <MotorcycleButton 
+                  style={{ backgroundColor: theme.colors.vermelho }}
+                  onPress={handleDeleteMotorcycle}
+                >
+                  <MotorcycleButtonText>Deletar</MotorcycleButtonText>
                 </MotorcycleButton>
               </MotorcycleButtonContainer>
             </MotorcycleInformationContainer>
