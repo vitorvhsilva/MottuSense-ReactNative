@@ -28,6 +28,43 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
     }
   };
 
+  const handleCadastrar = async () => {
+    try {
+      const motoTypeMap: Record<string, string> = {
+        "Mottu Pop": "MOTTU_POP",
+        "Mottu E": "MOTTU_E",
+        "Mottu Sport": "MOTTU_SPORT"
+      };
+
+      const response = await fetch("https://localhost:7050/api/v1/motos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          PlacaMoto: placa,
+          ModeloMoto: motoTypeMap[selectedMotoType] || "MOTTU_POP",
+          StatusMoto: "PRONTA_PARA_ALUGUEL",
+          ChassiMoto: chassi,
+          IotMoto: iot,
+          IdPatio: "idTeste"
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao cadastrar moto");
+      }
+
+      const data = await response.json();
+      console.log("Moto cadastrada:", data);
+
+      navigation.navigate("Home");
+
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  };
+
   return (
     <Container>
       <Scroll>
@@ -82,7 +119,7 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
         <InputAuthComponent label="IoT" value={iot} onChangeText={setIot} />
 
         <SignUpButtonContainer>
-          <SignUpButton onPress={() => navigation.navigate('Home')}>
+          <SignUpButton onPress={handleCadastrar}>
             <ButtonText>Cadastrar</ButtonText>
           </SignUpButton>
         </SignUpButtonContainer>
