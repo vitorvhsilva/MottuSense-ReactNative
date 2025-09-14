@@ -1,5 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { ViewMotorcycleFilterComponent } from "../components/view_motorcycle/ViewMotorcycleFilterComponent";
 import theme from "../styles/theme";
@@ -19,6 +19,24 @@ type FilterOption = {
 export const ViewMotorcycleScreen: React.FC<ViewMotorcycleScreenProps> = ({ navigation }) => {
   const [selectedFilter, setSelectedFilter] = useState<number | null>(null);
   const [searchText, setSearchText] = useState<string>("");
+  const [motos, setMotos] = useState<any[]>([]);
+
+  const fetchMotos = async () => {
+    try {
+      const response = await fetch("https://localhost:7050/api/v1/motos/patios/idTeste?pagina=1&tamanho=5");
+      if (!response.ok) throw new Error("Erro ao buscar motos");
+
+      const data = await response.json();
+      setMotos(data.data || []);
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMotos();
+  }, []);
+
 
   const filterOptions: FilterOption[] = [
     { id: 1, label: "Placa" },
@@ -51,8 +69,10 @@ export const ViewMotorcycleScreen: React.FC<ViewMotorcycleScreenProps> = ({ navi
       />
 
       <ViewMotorcyclesComponent 
+        motos={motos}
         selectedFilter={selectedFilter}
         searchText={searchText}
+        onRefresh={fetchMotos}
       />
     </Container>
   )

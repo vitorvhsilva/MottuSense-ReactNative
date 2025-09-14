@@ -3,130 +3,182 @@ import styled from "styled-components/native";
 import theme from "../../styles/theme";
 
 type Motorcycle = {
-  id: string;
-  model: string;
-  plate: string;
-  chassi?: string;
-  iot?: string;
+  idMoto: string;
+  modeloMoto: string;
+  placaMoto: string;
+  chassiMoto?: string;
+  iotMoto?: string;
 };
+
+type MotorcycleDetail = {
+  idMoto: string;
+  modeloMoto: string;
+  placaMoto: string;
+  statusMoto: string;
+  chassiMoto?: string;
+  iotMoto?: string;
+  idPatio: string;
+  localizacao?: {
+    idMoto: string;
+    latitudeMoto: string;
+    longitudeMoto: string;
+  };
+};
+
 
 type ViewMotorcyclesComponentProps = {
+  motos: Motorcycle[];
   selectedFilter: number | null;
   searchText: string;
+  onRefresh: () => void; 
 };
 
-export const ViewMotorcyclesComponent = ({ 
-  selectedFilter, 
-  searchText 
+export const ViewMotorcyclesComponent = ({
+  motos,
+  selectedFilter,
+  searchText,
+  onRefresh
 }: ViewMotorcyclesComponentProps) => {
-  const [motorcycles] = useState<Motorcycle[]>([
-    {
-      id: "1",
-      model: "Mottu Pop",
-      plate: "TTTT-333",
-      chassi: "9BWZZZ377VT004251",
-      iot: "IoT-12345"
-    },
-    {
-      id: "2",
-      model: "Mottu Smart",
-      plate: "ABCD-123",
-      chassi: "9BWZZZ377VT004252",
-      iot: "IoT-12346"
-    },
-    {
-      id: "3",
-      model: "Mottu E",
-      plate: "EFGH-456",
-      chassi: "9BWZZZ377VT004253",
-      iot: "IoT-12347"
-    }
-  ]);
-  
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [editingMotorcycle, setEditingMotorcycle] = useState<MotorcycleDetail | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
+  const toggleExpand = async (id: string) => {
+    if (expandedId === id) {
+      setExpandedId(null);
+      setEditingMotorcycle(null);
+      return;
+    }
+
+    setExpandedId(id);
+    await fetchMotorcycleById(id); // busca os dados completos
   };
 
-  const filteredMotorcycles = motorcycles.filter(motorcycle => {
-
+  const filteredMotorcycles = motos.filter((motorcycle) => {
     if (!selectedFilter && !searchText) return true;
-    
-    if (searchText) {
-      const searchLower = searchText.toLowerCase();
-      return (
-        motorcycle.model.toLowerCase().includes(searchLower) ||
-        motorcycle.plate.toLowerCase().includes(searchLower) ||
-        (motorcycle.iot && motorcycle.iot.toLowerCase().includes(searchLower)) ||
-        (motorcycle.chassi && motorcycle.chassi.toLowerCase().includes(searchLower))
-      );
-    }
-    
+
+    const searchLower = searchText.toLowerCase();
+
     switch (selectedFilter) {
-      case 1:
-        return motorcycle.plate.toLowerCase().includes(searchText.toLowerCase());
-      case 2:
-        return motorcycle.iot?.toLowerCase().includes(searchText.toLowerCase());
-      case 3: // Filial
-        // Adicione a lógica para filtrar por filial se necessário
+      case 1: 
+        return motorcycle.placaMoto.toLowerCase().includes(searchLower);
+      case 2: 
+        return motorcycle.iotMoto?.toLowerCase().includes(searchLower);
+      case 3: 
         return true;
       default:
-        return true;
+        return (
+          motorcycle.modeloMoto.toLowerCase().includes(searchLower) ||
+          motorcycle.placaMoto.toLowerCase().includes(searchLower) ||
+          motorcycle.iotMoto?.toLowerCase().includes(searchLower) ||
+          motorcycle.chassiMoto?.toLowerCase().includes(searchLower)
+        );
     }
   });
+
+  const fetchMotorcycleById = async (id: string) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`https://localhost:7050/api/v1/motos/${id}`);
+      if (!response.ok) throw new Error("Erro ao buscar moto");
+
+      const json = await response.json();
+      setEditingMotorcycle(json.data); // pega apenas o objeto data
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateMotorcycle = async () => {
+    if (!editingMotorcycle) return;
+
+    try {
+      const response = await fetch(`https://localhost:7050/api/v1/motos`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idMoto: editingMotorcycle.idMoto,
+          placaMoto: editingMotorcycle.placaMoto,
+          modeloMoto: editingMotorcycle.modeloMoto,
+          statusMoto: editingMotorcycle.statusMoto,
+          chassiMoto: editingMotorcycle.chassiMoto,
+          iotMoto: editingMotorcycle.iotMoto,
+          idPatio: editingMotorcycle.idPatio
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao atualizar moto");
+
+      const data = await response.json();
+      console.log("Moto atualizada:", data);
+      alert("Moto atualizada com sucesso!");
+      setExpandedId(null);
+      setEditingMotorcycle(null);
+      onRefresh();
+    } catch (error) {
+      console.error("Erro na atualização:", error);
+      alert("Erro ao atualizar moto");
+    }
+  };
 
   return (
     <Container>
       {filteredMotorcycles.map((motorcycle) => (
-        <MotorcycleItem key={motorcycle.id}>
-          <MotorcycleContainer 
+        <MotorcycleItem key={motorcycle.idMoto}>
+          <MotorcycleContainer
             style={{
-              backgroundColor: expandedId === motorcycle.id 
-                ? theme.colors.verdeEscuro2 
-                : theme.colors.cinza
+              backgroundColor:
+                expandedId === motorcycle.idMoto
+                  ? theme.colors.verdeEscuro2
+                  : theme.colors.cinza,
             }}
           >
-            <MotorcycleIcon source={require('../../../assets/icons/moto_verde.png')} />
+            <MotorcycleIcon source={require("../../../assets/icons/moto_verde.png")} />
             <MotorcycleTextContainer>
-              <MotorcycleType>{motorcycle.model}</MotorcycleType>
-              <MotorcyclePlate>Placa: {motorcycle.plate}</MotorcyclePlate>
+              <MotorcycleType>{motorcycle.modeloMoto}</MotorcycleType>
+              <MotorcyclePlate>Placa: {motorcycle.placaMoto}</MotorcyclePlate>
             </MotorcycleTextContainer>
-            <ExpandIcon onPress={() => toggleExpand(motorcycle.id)}>
-              <ExpandIconImage 
-                source={require('../../../assets/icons/expandir.png')} 
-                style={{
-                  transform: [{ rotate: expandedId === motorcycle.id ? '90deg' : '0deg' }]
-                }}
+            <ExpandIcon onPress={() => toggleExpand(motorcycle.idMoto)}>
+              <ExpandIconImage
+                source={require("../../../assets/icons/expandir.png")}
+                style={{ transform: [{ rotate: expandedId === motorcycle.idMoto ? "90deg" : "0deg" }] }}
               />
             </ExpandIcon>
           </MotorcycleContainer>
-          
-          {expandedId === motorcycle.id && (
+
+          {expandedId === motorcycle.idMoto && editingMotorcycle && (
             <MotorcycleInformationContainer>
               <MotorcycleInformation>
                 <MotorcycleInformationText>Placa</MotorcycleInformationText>
-                <MotorcycleInformationInput 
-                  value={motorcycle.plate}
-                  editable={false}
+                <MotorcycleInformationInput
+                  value={editingMotorcycle.placaMoto || ""}
+                  onChangeText={(text: string) =>
+                    setEditingMotorcycle(prev => prev ? { ...prev, placaMoto: text } : null)
+                  }
                 />
               </MotorcycleInformation>
               <MotorcycleInformation>
                 <MotorcycleInformationText>Chassi</MotorcycleInformationText>
                 <MotorcycleInformationInput
-                  value={motorcycle.chassi || ''}
-                  editable={false}
+                  value={editingMotorcycle.chassiMoto || ""}
+                  onChangeText={(text: string) =>
+                    setEditingMotorcycle(prev => prev ? { ...prev, chassiMoto: text } : null)
+                  }
                 />
               </MotorcycleInformation>
               <MotorcycleInformation>
                 <MotorcycleInformationText>IoT</MotorcycleInformationText>
                 <MotorcycleInformationInput
-                  value={motorcycle.iot || ''}
-                  editable={false}
+                  value={editingMotorcycle.iotMoto || ""}
+                  onChangeText={(text: string) =>
+                    setEditingMotorcycle(prev => prev ? { ...prev, iotMoto: text } : null)
+                  }
                 />
               </MotorcycleInformation>
               <MotorcycleButtonContainer>
-                <MotorcycleButton>
+                <MotorcycleButton onPress={handleUpdateMotorcycle}>
                   <MotorcycleButtonText>Editar</MotorcycleButtonText>
                 </MotorcycleButton>
               </MotorcycleButtonContainer>
@@ -135,8 +187,8 @@ export const ViewMotorcyclesComponent = ({
         </MotorcycleItem>
       ))}
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.View`
     background-color: ${theme.colors.branco};
