@@ -4,6 +4,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { InputAuthComponent } from '../components/InputAuthComponent';
 import theme from '../styles/theme';
+import Toast from "react-native-toast-message";
+import { LoadingComponent } from '../components/LoadingComponent';
 
 type MotoRegisterScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddMotorcycle'>;
@@ -16,6 +18,7 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
   
   const [selectedMotoType, setSelectedMotoType] = useState<string>('');
   const [showMotoTypes, setShowMotoTypes] = useState(false);
+  const [loading, setLoading] = useState(false); // estado de carregamento
   
   const motoTypes = ['Mottu Pop', 'Mottu E', 'Mottu Sport'];
 
@@ -28,18 +31,66 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
     }
   };
 
-  const handleCadastrar = async () => {
+    const handleCadastrar = async () => {
     try {
+      const placaRegex = /^[A-Z0-9]{4}-[A-Z0-9]{3}$/i;
+
+      if (!placaRegex.test(placa)) {
+        Toast.show({
+          type: "error",
+          text1: "Placa inválida",
+          text2: "Use o formato AAAA-AAA (ex: ABCD-123)",
+          position: "top",
+          visibilityTime: 3000,
+        });
+        return;
+      }
+
+      if (chassi && chassi.length !== 7) {
+        Toast.show({
+          type: "error",
+          text1: "Chassi inválido",
+          text2: "O chassi deve ter exatamente 7 caracteres",
+          position: "top",
+          visibilityTime: 3000,
+        });
+        return;
+      }
+
+      if (iot && iot.length !== 7) {
+        Toast.show({
+          type: "error",
+          text1: "IoT inválido",
+          text2: "O código IoT deve ter exatamente 7 caracteres",
+          position: "top",
+          visibilityTime: 3000,
+        });
+        return;
+      }
+
+      if (!selectedMotoType) {
+        Toast.show({
+          type: "error",
+          text1: "Tipo da moto obrigatório",
+          text2: "Selecione o tipo da moto antes de cadastrar",
+          position: "top",
+          visibilityTime: 3000,
+        });
+        return;
+      }
+
+      setLoading(true); // ativa o carregamento
+
       const motoTypeMap: Record<string, string> = {
         "Mottu Pop": "MOTTU_POP",
         "Mottu E": "MOTTU_E",
-        "Mottu Sport": "MOTTU_SPORT"
+        "Mottu Sport": "MOTTU_SPORT",
       };
 
       const response = await fetch("https://localhost:7050/api/v1/motos", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           PlacaMoto: placa,
@@ -47,8 +98,8 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
           StatusMoto: "PRONTA_PARA_ALUGUEL",
           ChassiMoto: chassi,
           IotMoto: iot,
-          IdPatio: "idTeste"
-        })
+          IdPatio: "idTeste",
+        }),
       });
 
       if (!response.ok) {
@@ -58,12 +109,29 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
       const data = await response.json();
       console.log("Moto cadastrada:", data);
 
-      navigation.navigate("Home");
+      Toast.show({
+        type: "success",
+        text1: "Sucesso",
+        text2: "Moto cadastrada com sucesso!",
+        position: "top",
+        visibilityTime: 3000,
+      });
 
+      navigation.navigate("Home");
     } catch (error) {
       console.error("Erro na requisição:", error);
+      Toast.show({
+        type: "error",
+        text1: "Erro na requisição",
+        text2: error instanceof Error ? error.message : "Erro inesperado",
+        position: "top",
+        visibilityTime: 3000,
+      });
+    } finally {
+      setLoading(false); 
     }
   };
+
 
   return (
     <Container>
@@ -124,6 +192,8 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
           </SignUpButton>
         </SignUpButtonContainer>
       </Scroll>
+
+      <LoadingComponent loading={loading} />
     </Container>
   );
 };
