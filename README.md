@@ -3,6 +3,9 @@
 ## Figma do Projeto
 <a> https://www.figma.com/design/cmULc45tgBYnrHS2URh58d/MottuSense?node-id=0-1&t=4uKWdg6NpRxDaUzx-1 </a>
 
+## Link do Deploy
+<a> [https://www.figma.com/design/cmULc45tgBYnrHS2URh58d/MottuSense?node-id=0-1&t=4uKWdg6NpRxDaUzx-1](https://mottusense--wc5kvt5tic.expo.app/) </a>
+
 ## Integrantes
 | Nome Completo         | RM      |
 |-----------------------|---------|
