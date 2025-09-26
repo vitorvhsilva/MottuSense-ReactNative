@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  motos:
+    image: vitorvhsilva/mottusense-dotnet:latest 
+    ports:
+      - "7050:7050"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development

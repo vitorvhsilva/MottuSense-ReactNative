@@ -6,6 +6,7 @@ import { InputAuthComponent } from '../components/InputAuthComponent';
 import theme from '../styles/theme';
 import Toast from "react-native-toast-message";
 import { LoadingComponent } from '../components/LoadingComponent';
+import { API_BASE_URL } from '../services/contants';
 
 type MotoRegisterScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddMotorcycle'>;
@@ -87,7 +88,7 @@ export const AddMotorcycle: React.FC<MotoRegisterScreenProps> = ({ navigation })
         "Mottu Sport": "MOTTU_SPORT",
       };
 
-      const response = await fetch("https://localhost:7050/api/v1/motos", {
+      const response = await fetch(`${API_BASE_URL}/api/v1/motos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

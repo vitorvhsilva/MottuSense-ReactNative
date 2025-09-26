@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import theme from "../../styles/theme";
 import Toast from "react-native-toast-message";
 import { LoadingComponent } from "../LoadingComponent";
+import { API_BASE_URL } from "../../services/contants";
 
 type Motorcycle = {
   idMoto: string;
@@ -81,7 +82,7 @@ export const ViewMotorcyclesComponent = ({
   const fetchMotorcycleById = async (id: string) => {
     try {
       setLoading(true);
-      const response = await fetch(`https://localhost:7050/api/v1/motos/${id}`);
+      const response = await fetch(`${API_BASE_URL}/api/v1/motos/${id}`);
       if (!response.ok) throw new Error("Erro ao buscar moto");
 
       const json = await response.json();
@@ -144,7 +145,7 @@ export const ViewMotorcyclesComponent = ({
     try {
       setLoading(true);
 
-      const response = await fetch(`https://localhost:7050/api/v1/motos`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/motos`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editingMotorcycle),
@@ -185,7 +186,7 @@ export const ViewMotorcyclesComponent = ({
       setLoading(true);
 
       const response = await fetch(
-        `https://localhost:7050/api/v1/motos/${editingMotorcycle.idMoto}`,
+        `${API_BASE_URL}/api/v1/motos/${editingMotorcycle.idMoto}`,
         {
           method: "DELETE",
         }

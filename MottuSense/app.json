@@ -26,6 +26,18 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7b2efb7f-8dbb-4228-8584-7584050c6e22"
+      }
+    },
+    "owner": "vitorvhsilva",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/7b2efb7f-8dbb-4228-8584-7584050c6e22"
+    }
   }
 }

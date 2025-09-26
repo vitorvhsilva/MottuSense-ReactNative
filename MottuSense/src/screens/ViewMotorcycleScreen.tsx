@@ -6,6 +6,7 @@ import theme from "../styles/theme";
 import { RootStackParamList } from "../types/navigation";
 import { ViewMotorcycleSearchBarComponent } from "../components/view_motorcycle/ViewMotorcycleSearchBarComponent";
 import { ViewMotorcyclesComponent } from "../components/view_motorcycle/ViewMotorcyclesComponent";
+import { API_BASE_URL } from "../services/contants";
 
 type ViewMotorcycleScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ViewMotorcycle'>;
@@ -23,7 +24,7 @@ export const ViewMotorcycleScreen: React.FC<ViewMotorcycleScreenProps> = ({ navi
 
   const fetchMotos = async () => {
     try {
-      const response = await fetch("https://localhost:7050/api/v1/motos/patios/idTeste?pagina=1&tamanho=5");
+      const response = await fetch(`${API_BASE_URL}/api/v1/motos/patios/idTeste?pagina=1&tamanho=5`);
       if (!response.ok) throw new Error("Erro ao buscar motos");
 
       const data = await response.json();
