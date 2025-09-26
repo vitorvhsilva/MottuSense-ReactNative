@@ -58,9 +58,6 @@ cd mottusense
 
 # Instale as dependências
 npm install
-
-# Para iOS (Mac apenas)
-cd ios && pod install && cd ..
 ```
 ## Execução
 ```bash
@@ -68,6 +65,20 @@ cd ios && pod install && cd ..
 npm start
 
 #Acesse o endereco: http://localhost:8081
+```
+
+## Rodar API Local
+```bash
+# Abre um terminal, e digite os comandos na pasta raiz do projeto
+docker-compose pull
+docker-compose up --build --force-recreate
+
+# Descomente a váriavel
+export const API_BASE_URL = 'http://localhost:7050';
+#e comente a
+export const API_BASE_URL = 'https://mottusense-dotnet.onrender.com';
+
+## Dessa forma você batera na api local!
 ```
 
 ## Telas do Projeto
