@@ -4,7 +4,12 @@
 <a> https://www.figma.com/design/cmULc45tgBYnrHS2URh58d/MottuSense?node-id=0-1&t=4uKWdg6NpRxDaUzx-1 </a>
 
 ## Link do Deploy
-<a> [https://www.figma.com/design/cmULc45tgBYnrHS2URh58d/MottuSense?node-id=0-1&t=4uKWdg6NpRxDaUzx-1](https://mottusense--wc5kvt5tic.expo.app/) </a>
+<a> https://mottusense--wc5kvt5tic.expo.app/ </a>
+
+## QR Code do Build (Batendo no Docker Local)
+
+<img width="338" height="368" alt="image" src="https://github.com/user-attachments/assets/2bfa2d25-ffca-4738-aaae-4389aa0b01a5" />
+
 
 ## Integrantes
 | Nome Completo         | RM      |
