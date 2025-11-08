@@ -1,5 +1,9 @@
 # MottuSense - Mapeamento Inteligente do Pátio e Gestão das Motos
 
+## Hash do último commit
+
+2d67305c8e75db6f516f63200574b62a79bd99a7
+
 ## Figma do Projeto
 <a> https://www.figma.com/design/cmULc45tgBYnrHS2URh58d/MottuSense?node-id=0-1&t=4uKWdg6NpRxDaUzx-1 </a>
 
